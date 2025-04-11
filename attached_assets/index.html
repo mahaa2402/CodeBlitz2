@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Road Obstacle Detection - Home{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card shadow-lg border-0 rounded-lg">
+            <div class="card-header bg-primary text-white">
+                <h1 class="text-center mb-0">Road Obstacle Detection System</h1>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="p-4">
+                            <h2>Welcome to Road Obstacle Detection</h2>
+                            <p class="lead">Detect and identify obstacles on the road in real-time using advanced computer vision.</p>
+                            <p>This application uses YOLOv8 to detect objects like:</p>
+                            <ul class="feature-list">
+                                <li><i class="fas fa-car text-primary me-2"></i> Vehicles (cars, trucks, buses)</li>
+                                <li><i class="fas fa-bicycle text-primary me-2"></i> Bicycles & motorcycles</li>
+                                <li><i class="fas fa-road text-primary me-2"></i> Road hazards (potholes, debris)</li>
+                                <li><i class="fas fa-traffic-light text-primary me-2"></i> Traffic signs & signals</li>
+                                <li><i class="fas fa-dog text-primary me-2"></i> Animals</li>
+                            </ul>
+                            <p>Choose one of the detection methods to get started:</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="{{ url_for('static', filename='img/detection_demo.jpg') }}" alt="Object Detection Demo" class="img-fluid rounded shadow">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <div class="card h-100 shadow border-0">
+                    <div class="card-body text-center">
+                        <i class="fas fa-image fa-3x text-primary mb-3"></i>
+                        <h4>Single Image</h4>
+                        <p>Upload and analyze a single image to detect obstacles.</p>
+                        <a href="{{ url_for('image_detection') }}" class="btn btn-primary mt-2">Try Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card h-100 shadow border-0">
+                    <div class="card-body text-center">
+                        <i class="fas fa-images fa-3x text-primary mb-3"></i>
+                        <h4>Multiple Images</h4>
+                        <p>Batch process multiple images at once.</p>
+                        <a href="{{ url_for('multiple_images_detection') }}" class="btn btn-primary mt-2">Try Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card h-100 shadow border-0">
+                    <div class="card-body text-center">
+                        <i class="fas fa-video fa-3x text-primary mb-3"></i>
+                        <h4>Video Analysis</h4>
+                        <p>Upload and process video files to detect obstacles.</p>
+                        <a href="{{ url_for('video_detection') }}" class="btn btn-primary mt-2">Try Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card h-100 shadow border-0">
+                    <div class="card-body text-center">
+                        <i class="fas fa-webcam fa-3x text-primary mb-3"></i>
+                        <h4>Webcam Detection</h4>
+                        <p>Real-time detection using your webcam.</p>
+                        <a href="{{ url_for('webcam_detection') }}" class="btn btn-primary mt-2">Try Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

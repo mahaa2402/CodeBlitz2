@@ -1,0 +1,272 @@
+{% extends "base.html" %}
+
+{% block title %}Road Obstacle Detection - Video{% endblock %}
+
+{% block extra_css %}
+<style>
+    .upload-area {
+        border: 2px dashed #3498db;
+        border-radius: 5px;
+        padding: 25px;
+        text-align: center;
+        margin-bottom: 20px;
+        background-color: #f8f9fa;
+        transition: all 0.3s ease;
+    }
+    
+    .upload-area:hover {
+        background-color: #e9ecef;
+        cursor: pointer;
+    }
+    
+    .loading {
+        display: none;
+        text-align: center;
+        margin: 20px 0;
+    }
+    
+    .result-box {
+        display: none;
+        margin-top: 30px;
+    }
+    
+    .progress-bar {
+        height: 20px;
+        border-radius: 5px;
+    }
+    
+    .video-container {
+        position: relative;
+        width: 100%;
+        border-radius: 5px;
+        overflow: hidden;
+        background-color: #000;
+    }
+    
+    .video-container video {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card shadow border-0">
+            <div class="card-header bg-primary text-white">
+                <h2 class="mb-0"><i class="fas fa-video me-2"></i>Video Detection</h2>
+            </div>
+            <div class="card-body">
+                <p class="lead">Upload a video file to detect road obstacles throughout the video.</p>
+                
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <div class="upload-area" id="uploadArea">
+                        <i class="fas fa-cloud-upload-alt fa-3x text-primary mb-3"></i>
+                        <h4>Drop video here or click to browse</h4>
+                        <p class="text-muted">Supported formats: MP4, AVI, MOV (Max 50MB)</p>
+                        <input type="file" id="videoInput" name="video" accept=".mp4,.avi,.mov" style="display: none;">
+                    </div>
+                    
+                    <div id="selectedVideoContainer" class="mb-3" style="display: none;">
+                        <div class="alert alert-info d-flex align-items-center">
+                            <i class="fas fa-film me-2"></i>
+                            <div id="selectedVideoName"></div>
+                            <button type="button" class="btn-close ms-auto" id="clearVideoBtn" aria-label="Clear"></button>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary" id="detectBtn">
+                            <i class="fas fa-search me-2"></i>Detect Obstacles in Video
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="loading" id="loadingIndicator">
+                    <div class="progress mb-3">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                    </div>
+                    <p>Processing video... This may take several minutes.</p>
+                </div>
+                
+                <div class="result-box" id="resultBox">
+                    <h3 class="mb-4">Detection Results</h3>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="mb-0">Original Video</h5>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="video-container">
+                                        <video id="originalVideo" controls>
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="mb-0">Processed Video with Detections</h5>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="video-container">
+                                        <video id="resultVideo" controls>
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Processing Summary</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="summaryMessage"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    $(document).ready(function() {
+        // Handle drag and drop
+        const uploadArea = $('#uploadArea');
+        const videoInput = $('#videoInput');
+        const selectedVideoContainer = $('#selectedVideoContainer');
+        const selectedVideoName = $('#selectedVideoName');
+        
+        uploadArea.on('click', function() {
+            videoInput.click();
+        });
+        
+        uploadArea.on('dragover', function(e) {
+            e.preventDefault();
+            uploadArea.addClass('bg-light');
+        });
+        
+        uploadArea.on('dragleave', function() {
+            uploadArea.removeClass('bg-light');
+        });
+        
+        uploadArea.on('drop', function(e) {
+            e.preventDefault();
+            uploadArea.removeClass('bg-light');
+            
+            const files = e.originalEvent.dataTransfer.files;
+            if (files.length > 0) {
+                videoInput[0].files = files;
+                updateSelectedVideo();
+            }
+        });
+        
+        videoInput.on('change', function() {
+            updateSelectedVideo();
+        });
+        
+        $('#clearVideoBtn').on('click', function() {
+            videoInput.val('');
+            selectedVideoContainer.hide();
+            uploadArea.show();
+        });
+        
+        function updateSelectedVideo() {
+            if (videoInput[0].files && videoInput[0].files[0]) {
+                const file = videoInput[0].files[0];
+                const fileSize = formatFileSize(file.size);
+                
+                selectedVideoName.html(`
+                    <strong>${file.name}</strong> (${fileSize})
+                `);
+                
+                selectedVideoContainer.show();
+                uploadArea.hide();
+            } else {
+                selectedVideoContainer.hide();
+                uploadArea.show();
+            }
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(1024));
+            
+            return parseFloat((bytes / Math.pow(1024, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+        
+        // Form submission
+        $('#uploadForm').on('submit', function(e) {
+            e.preventDefault();
+            
+            if (!videoInput[0].files || videoInput[0].files.length === 0) {
+                alert('Please select a video file first.');
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('video', videoInput[0].files[0]);
+            
+            // Show loading indicator
+            $('#loadingIndicator').show();
+            $('#resultBox').hide();
+            
+            // Submit via AJAX
+            $.ajax({
+                url: '/process_video',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    // Hide loading indicator
+                    $('#loadingIndicator').hide();
+                    
+                    // Show results
+                    $('#originalVideo').attr('src', response.original_video);
+                    $('#resultVideo').attr('src', response.result_video);
+                    
+                    // Force videos to load
+                    document.getElementById('originalVideo').load();
+                    document.getElementById('resultVideo').load();
+                    
+                    // Show summary message
+                    $('#summaryMessage').html(`
+                        <div class="alert alert-success">
+                            <i class="fas fa-check-circle me-2"></i>${response.message}
+                        </div>
+                    `);
+                    
+                    $('#resultBox').show();
+                },
+                error: function(xhr, status, error) {
+                    // Hide loading indicator
+                    $('#loadingIndicator').hide();
+                    
+                    // Show error
+                    let errorMessage = 'An error occurred while processing the video.';
+                    if (xhr.responseJSON && xhr.responseJSON.error) {
+                        errorMessage = xhr.responseJSON.error;
+                    }
+                    
+                    alert(errorMessage);
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %}Webcam Detection - YOLOv8 Object Detection{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3>Webcam Object Detection</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+                            <div class="alert alert-info">
+                                <p>Click the "Start Webcam" button to begin detection. Note that this feature requires camera access permission.</p>
+                            </div>
+
+                            <div class="text-center mb-3">
+                                <button id="start-webcam" class="btn btn-success me-2"><i class="fas fa-video"></i> Start Webcam</button>
+                                <button id="stop-webcam" class="btn btn-danger" disabled><i class="fas fa-stop-circle"></i> Stop Webcam</button>
+                            </div>
+
+                            <div class="webcam-container text-center">
+                                <div id="loading-indicator" style="display: none;">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <p>Starting webcam feed...</p>
+                                </div>
+                                <div id="video-container">
+                                    <img id="webcam-feed" src="" style="max-width: 100%; display: none;">
+                                </div>
+                            </div>
+
+                            <div id="detection-results" class="mt-4" style="display: none;">
+                                <h4>Detection Results:</h4>
+                                <div id="objects-detected"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        let feedInterval;
+        const startButton = $('#start-webcam');
+        const stopButton = $('#stop-webcam');
+        const webcamFeed = $('#webcam-feed');
+        const loadingIndicator = $('#loading-indicator');
+        const detectionResults = $('#detection-results');
+        const objectsDetected = $('#objects-detected');
+
+        startButton.click(function() {
+            loadingIndicator.show();
+            $.ajax({
+                url: '/start_webcam',
+                type: 'POST',
+                success: function(response) {
+                    if (response.status === 'started') {
+                        loadingIndicator.hide();
+                        webcamFeed.show();
+                        startButton.prop('disabled', true);
+                        stopButton.prop('disabled', false);
+                        detectionResults.show();
+                        
+                        // Start polling for webcam frames
+                        feedInterval = setInterval(function() {
+                            webcamFeed.attr('src', '/video_feed?' + new Date().getTime());
+                            
+                            // Get detection results
+                            $.get('/detection_results', function(data) {
+                                if (data && data.objects) {
+                                    let resultsHtml = '<ul class="list-group">';
+                                    data.objects.forEach(function(obj) {
+                                        resultsHtml += `<li class="list-group-item d-flex justify-content-between align-items-center">
+                                            ${obj.class}
+                                            <span class="badge bg-primary rounded-pill">Confidence: ${(obj.confidence * 100).toFixed(2)}%</span>
+                                        </li>`;
+                                    });
+                                    resultsHtml += '</ul>';
+                                    objectsDetected.html(resultsHtml);
+                                }
+                            });
+                        }, 200);
+                    }
+                },
+                error: function() {
+                    loadingIndicator.hide();
+                    alert('Failed to start webcam detection. Please try again.');
+                }
+            });
+        });
+
+        stopButton.click(function() {
+            clearInterval(feedInterval);
+            $.ajax({
+                url: '/stop_webcam',
+                type: 'POST',
+                success: function() {
+                    webcamFeed.hide();
+                    startButton.prop('disabled', false);
+                    stopButton.prop('disabled', true);
+                    detectionResults.hide();
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}
