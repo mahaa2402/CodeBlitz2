@@ -33,11 +33,18 @@ app.config['RESULTS_FOLDER'] = RESULTS_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 50MB max upload size
 
 # Initialize detector with default settings
-obstacle_detector = ObstacleDetector(
-    model_path="yolov8n.pt",
-    confidence_threshold=0.5,
-    road_hazard_confidence_threshold=0.4  # Lower threshold for road hazards
-)
+try:
+    obstacle_detector = ObstacleDetector(
+        model_path="model/yolov4-tiny.weights",
+        config_path="model/yolov4-tiny.cfg",
+        classes_path="model/coco.names",
+        confidence_threshold=0.5,
+        road_hazard_confidence_threshold=0.4
+    )
+    logger.info("Detector initialized successfully")
+except Exception as e:
+    logger.error(f"Error initializing detector: {str(e)}")
+    obstacle_detector = None
 
 # Global variables for webcam
 webcam_active = False
@@ -70,15 +77,26 @@ def webcam_detection():
 
 @app.route('/settings')
 def settings():
-    current_settings = {
-        'confidence_threshold': session.get('confidence_threshold', obstacle_detector.confidence_threshold),
-        'road_hazard_confidence_threshold': session.get('road_hazard_confidence_threshold', obstacle_detector.road_hazard_confidence_threshold),
-        'enable_road_hazard_priority': session.get('enable_road_hazard_priority', True)
-    }
+    if obstacle_detector:
+        current_settings = {
+            'confidence_threshold': session.get('confidence_threshold', obstacle_detector.confidence_threshold),
+            'road_hazard_confidence_threshold': session.get('road_hazard_confidence_threshold', obstacle_detector.road_hazard_confidence_threshold),
+            'enable_road_hazard_priority': session.get('enable_road_hazard_priority', obstacle_detector.road_hazard_priority)
+        }
+    else:
+        current_settings = {
+            'confidence_threshold': session.get('confidence_threshold', 0.5),
+            'road_hazard_confidence_threshold': session.get('road_hazard_confidence_threshold', 0.4),
+            'enable_road_hazard_priority': session.get('enable_road_hazard_priority', True)
+        }
     return render_template('settings.html', settings=current_settings)
 
 @app.route('/update_settings', methods=['POST'])
 def update_settings():
+    if not obstacle_detector:
+        flash('Detector not initialized. Cannot update settings.', 'danger')
+        return redirect(url_for('settings'))
+        
     try:
         confidence_threshold = float(request.form.get('confidence_threshold', 0.5))
         road_hazard_confidence_threshold = float(request.form.get('road_hazard_confidence_threshold', 0.4))
@@ -112,6 +130,9 @@ def update_settings():
 
 @app.route('/process_image', methods=['POST'])
 def process_image():
+    if not obstacle_detector:
+        return jsonify({'error': 'Detector not initialized'}), 500
+        
     if 'image' not in request.files:
         return jsonify({'error': 'No image uploaded'}), 400
         
@@ -170,6 +191,9 @@ def process_image():
 
 @app.route('/process_multiple_images', methods=['POST'])
 def process_multiple_images():
+    if not obstacle_detector:
+        return jsonify({'error': 'Detector not initialized'}), 500
+        
     if 'images' not in request.files:
         return jsonify({'error': 'No images uploaded'}), 400
         
@@ -233,6 +257,9 @@ def process_multiple_images():
 
 @app.route('/process_video', methods=['POST'])
 def process_video():
+    if not obstacle_detector:
+        return jsonify({'error': 'Detector not initialized'}), 500
+        
     if 'video' not in request.files:
         return jsonify({'error': 'No video uploaded'}), 400
         
@@ -305,6 +332,9 @@ def process_video():
 def start_webcam():
     global webcam_active, webcam_capture, latest_webcam_frame, latest_detections
     
+    if not obstacle_detector:
+        return jsonify({'error': 'Detector not initialized'}), 500
+        
     if webcam_active:
         return jsonify({'status': 'already_running'})
     
