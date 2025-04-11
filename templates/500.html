@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}500 - Server Error{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8 text-center">
+        <div class="card shadow-lg border-0">
+            <div class="card-body p-5">
+                <h1 class="display-1 text-danger">500</h1>
+                <h2 class="mb-4">Server Error</h2>
+                
+                <svg width="200" height="200" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Road -->
+                    <rect x="50" y="300" width="400" height="100" fill="#555" />
+                    <!-- Road markings -->
+                    <line x1="50" y1="350" x2="450" y2="350" stroke="#fff" stroke-width="5" stroke-dasharray="30,20" />
+                    <!-- Warning sign -->
+                    <path d="M250,100 L350,300 L150,300 Z" fill="#dc3545" stroke="#dc3545" stroke-width="5" />
+                    <text x="250" y="240" font-size="80" text-anchor="middle" fill="#fff">!</text>
+                    <!-- Car -->
+                    <g transform="translate(250, 350)">
+                        <rect x="-40" y="-30" width="80" height="30" rx="10" fill="#3498db" />
+                        <rect x="-30" y="-40" width="60" height="20" rx="5" fill="#3498db" />
+                        <circle cx="-20" cy="0" r="10" fill="#333" />
+                        <circle cx="20" cy="0" r="10" fill="#333" />
+                        <!-- Smoke -->
+                        <path d="M-50,-25 C-70,-40 -60,-60 -40,-55 C-30,-70 -10,-65 -15,-50 C0,-60 10,-40 0,-30" fill="#999" />
+                    </g>
+                </svg>
+                
+                <p class="lead mt-4">Oops! Our detection system has encountered a problem.</p>
+                <p class="mb-4">Our technical team has been notified. Please try again later.</p>
+                
+                <a href="{{ url_for('index') }}" class="btn btn-primary">
+                    <i class="fas fa-home me-2"></i>Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,182 @@
+/* Custom CSS for Road Obstacle Detection System */
+
+/* General styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+/* Header styles */
+.navbar {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand i {
+    margin-right: 8px;
+}
+
+/* Card styles */
+.card {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 24px;
+    border: none;
+}
+
+.card-header {
+    padding: 16px 20px;
+    font-weight: 600;
+}
+
+/* Upload area */
+.upload-area {
+    border: 2px dashed #3498db;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+}
+
+.upload-area:hover {
+    background-color: #e9ecef;
+    cursor: pointer;
+}
+
+.upload-area i {
+    font-size: 3rem;
+    color: #3498db;
+    margin-bottom: 16px;
+}
+
+/* Results display */
+.result-box {
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.obstacle-card {
+    border-left: 4px solid #3498db;
+    border-radius: 4px;
+    padding: 12px;
+    margin-bottom: 12px;
+    background-color: #f8f9fa;
+}
+
+.obstacle-card.hazard {
+    border-left-color: #dc3545;
+    background-color: #fff8f8;
+}
+
+/* Loading indicators */
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+}
+
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* Video player styling */
+.video-container {
+    position: relative;
+    width: 100%;
+    background-color: #000;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.video-container video {
+    width: 100%;
+    display: block;
+}
+
+/* Feature icons */
+.feature-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.feature-list li i {
+    margin-right: 10px;
+    width: 24px;
+    text-align: center;
+}
+
+/* Footer */
+footer {
+    margin-top: 40px;
+    padding: 20px 0;
+    background-color: #343a40;
+    color: white;
+    border-radius: 8px;
+}
+
+/* Webcam container */
+.webcam-container {
+    width: 100%;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #000;
+    position: relative;
+}
+
+/* Toast/notification styling */
+#toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1050;
+}
+
+.toast {
+    min-width: 250px;
+}
+
+/* Hazard highlighting */
+.road-hazard {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* Road hazard indicator */
+.hazard-indicator {
+    display: inline-block;
+    padding: 2px 8px;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+/* Settings form */
+.settings-form .form-group {
+    margin-bottom: 20px;
+}
+
+.settings-form label {
+    font-weight: 600;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.1rem;
+    }
+    
+    .card-header h2 {
+        font-size: 1.5rem;
+    }
+}

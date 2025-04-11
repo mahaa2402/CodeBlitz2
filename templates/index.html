@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}Road Obstacle Detection - Home{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card shadow-lg border-0 rounded-lg">
+            <div class="card-header bg-primary text-white">
+                <h1 class="text-center mb-0">Road Obstacle Detection System</h1>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="p-4">
+                            <h2>Welcome to Road Obstacle Detection</h2>
+                            <p class="lead">Detect and identify obstacles on the road in real-time using advanced computer vision.</p>
+                            <p>This application uses YOLOv8 to detect objects like:</p>
+                            <ul class="feature-list">
+                                <li><i class="fas fa-car text-primary me-2"></i> Vehicles (cars, trucks, buses)</li>
+                                <li><i class="fas fa-bicycle text-primary me-2"></i> Bicycles & motorcycles</li>
+                                <li><i class="fas fa-road text-primary me-2"></i> Road hazards (potholes, debris)</li>
+                                <li><i class="fas fa-traffic-light text-primary me-2"></i> Traffic signs & signals</li>
+                                <li><i class="fas fa-dog text-primary me-2"></i> Animals</li>
+                            </ul>
+                            <p>Choose one of the detection methods to get started:</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <svg width="100%" height="300" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Road -->
+                            <rect x="0" y="300" width="800" height="300" fill="#555" />
+                            <!-- Road markings -->
+                            <line x1="0" y1="450" x2="800" y2="450" stroke="#fff" stroke-width="10" stroke-dasharray="50,30" />
+                            <!-- Car -->
+                            <g transform="translate(200, 380)">
+                                <rect x="0" y="0" width="120" height="50" rx="10" fill="#3498db" />
+                                <rect x="20" y="-20" width="80" height="30" rx="5" fill="#3498db" />
+                                <circle cx="30" cy="50" r="15" fill="#333" />
+                                <circle cx="90" cy="50" r="15" fill="#333" />
+                            </g>
+                            <!-- Detection box around car -->
+                            <rect x="190" y="350" width="140" height="90" stroke="#ff0000" stroke-width="3" fill="none" />
+                            <text x="195" y="345" fill="#ff0000" font-size="14">Car (95%)</text>
+                            <!-- Pedestrian -->
+                            <g transform="translate(500, 350)">
+                                <circle cx="0" cy="0" r="15" fill="#e74c3c" />
+                                <rect x="-5" y="15" width="10" height="40" fill="#e74c3c" />
+                                <line x1="-20" y1="30" x2="20" y2="30" stroke="#e74c3c" stroke-width="5" />
+                                <line x1="-5" y1="55" x2="-15" y2="90" stroke="#e74c3c" stroke-width="5" />
+                                <line x1="5" y1="55" x2="15" y2="90" stroke="#e74c3c" stroke-width="5" />
+                            </g>
+                            <!-- Detection box around pedestrian -->
+                            <rect x="475" y="330" width="50" height="110" stroke="#ff0000" stroke-width="3" fill="none" />
+                            <text x="475" y="325" fill="#ff0000" font-size="14">Person (98%)</text>
+                            <!-- HAZARD label -->
+                            <rect x="475" y="445" width="80" height="20" fill="#ff0000" />
+                            <text x="480" y="460" fill="#ffffff" font-size="12">ROAD HAZARD</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <div class="card h-100 shadow border-0">
+                    <div class="card-body text-center">
+                        <i class="fas fa-image fa-3x text-primary mb-3"></i>
+                        <h4>Single Image</h4>
+                        <p>Upload and analyze a single image to detect obstacles.</p>
+                        <a href="{{ url_for('image_detection') }}" class="btn btn-primary mt-2">Try Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card h-100 shadow border-0">
+                    <div class="card-body text-center">
+                        <i class="fas fa-images fa-3x text-primary mb-3"></i>
+                        <h4>Multiple Images</h4>
+                        <p>Batch process multiple images at once.</p>
+                        <a href="{{ url_for('multiple_images_detection') }}" class="btn btn-primary mt-2">Try Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card h-100 shadow border-0">
+                    <div class="card-body text-center">
+                        <i class="fas fa-video fa-3x text-primary mb-3"></i>
+                        <h4>Video Analysis</h4>
+                        <p>Upload and process video files to detect obstacles.</p>
+                        <a href="{{ url_for('video_detection') }}" class="btn btn-primary mt-2">Try Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card h-100 shadow border-0">
+                    <div class="card-body text-center">
+                        <i class="fas fa-camera fa-3x text-primary mb-3"></i>
+                        <h4>Webcam Detection</h4>
+                        <p>Real-time detection using your webcam.</p>
+                        <a href="{{ url_for('webcam_detection') }}" class="btn btn-primary mt-2">Try Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
