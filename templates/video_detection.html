@@ -2,136 +2,111 @@
 
 {% block title %}Road Obstacle Detection - Video{% endblock %}
 
-{% block extra_css %}
-<style>
-    .upload-area {
-        border: 2px dashed #3498db;
-        border-radius: 5px;
-        padding: 25px;
-        text-align: center;
-        margin-bottom: 20px;
-        background-color: #f8f9fa;
-        transition: all 0.3s ease;
-    }
-    
-    .upload-area:hover {
-        background-color: #e9ecef;
-        cursor: pointer;
-    }
-    
-    .loading {
-        display: none;
-        text-align: center;
-        margin: 20px 0;
-    }
-    
-    .result-box {
-        display: none;
-        margin-top: 30px;
-    }
-    
-    .progress-bar {
-        height: 20px;
-        border-radius: 5px;
-    }
-    
-    .video-container {
-        position: relative;
-        width: 100%;
-        border-radius: 5px;
-        overflow: hidden;
-        background-color: #000;
-    }
-    
-    .video-container video {
-        width: 100%;
-        height: auto;
-        display: block;
-    }
-</style>
-{% endblock %}
-
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-10">
-        <div class="card shadow border-0">
-            <div class="card-header bg-primary text-white">
-                <h2 class="mb-0"><i class="fas fa-video me-2"></i>Video Detection</h2>
+<div class="row">
+    <div class="col-12">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2><i class="fas fa-video me-2"></i>Video Obstacle Detection</h2>
             </div>
             <div class="card-body">
-                <p class="lead">Upload a video file to detect road obstacles throughout the video.</p>
-                
-                <form id="uploadForm" enctype="multipart/form-data">
-                    <div class="upload-area" id="uploadArea">
-                        <i class="fas fa-cloud-upload-alt fa-3x text-primary mb-3"></i>
-                        <h4>Drop video here or click to browse</h4>
-                        <p class="text-muted">Supported formats: MP4, AVI, MOV (Max 50MB)</p>
-                        <input type="file" id="videoInput" name="video" accept=".mp4,.avi,.mov" style="display: none;">
-                    </div>
-                    
-                    <div id="selectedVideoContainer" class="mb-3" style="display: none;">
-                        <div class="alert alert-info d-flex align-items-center">
-                            <i class="fas fa-film me-2"></i>
-                            <div id="selectedVideoName"></div>
-                            <button type="button" class="btn-close ms-auto" id="clearVideoBtn" aria-label="Clear"></button>
-                        </div>
-                    </div>
-                    
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-primary" id="detectBtn">
-                            <i class="fas fa-search me-2"></i>Detect Obstacles in Video
-                        </button>
-                    </div>
-                </form>
-                
-                <div class="loading" id="loadingIndicator">
-                    <div class="progress mb-3">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-                    </div>
-                    <p>Processing video... This may take several minutes.</p>
+                <p>Upload a road scene video to detect and highlight potential obstacles and hazards throughout the footage.</p>
+                <div class="alert alert-info" role="alert">
+                    <i class="fas fa-info-circle me-2"></i>Supported formats: MP4, AVI, MOV. Maximum file size: 50MB. Processing may take a few minutes depending on video length.
                 </div>
-                
-                <div class="result-box" id="resultBox">
-                    <h3 class="mb-4">Detection Results</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Upload Video</h3>
+            </div>
+            <div class="card-body">
+                <div id="dropZone" class="drop-zone mb-3">
+                    <div class="drop-zone-prompt">
+                        <i class="fas fa-cloud-upload-alt fa-3x mb-3"></i>
+                        <p>Drag & drop a video here or click to browse</p>
+                        <input type="file" id="videoInput" accept=".mp4,.avi,.mov" class="d-none">
+                    </div>
+                </div>
+                <div id="uploadDetails" class="mt-3 d-none">
+                    <h4>Selected Video:</h4>
+                    <p id="fileInfo"></p>
+                </div>
+                <div class="d-grid">
+                    <button id="processBtn" class="btn btn-primary" disabled>
+                        <i class="fas fa-cogs me-2"></i>Process Video
+                    </button>
+                </div>
+                <div id="loadingIndicator" class="text-center my-3 d-none">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <div class="progress mt-3">
+                        <div id="processingProgress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
+                    </div>
+                    <p class="mt-2">Processing video... This may take a few minutes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="resultsSection" class="d-none">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3>Detection Results</h3>
+                    <div>
+                        <a id="downloadResultBtn" href="#" class="btn btn-success" download="result_video.mp4">
+                            <i class="fas fa-download me-2"></i>Download Result
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="resultsSummary" class="alert alert-success mb-4">
+                        <i class="fas fa-check-circle me-2"></i><span id="summaryText"></span>
+                    </div>
                     
-                    <div class="row mb-4">
-                        <div class="col-md-6">
-                            <div class="card mb-4">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="card">
                                 <div class="card-header">
-                                    <h5 class="mb-0">Original Video</h5>
+                                    <h4>Original Video</h4>
                                 </div>
-                                <div class="card-body p-0">
-                                    <div class="video-container">
-                                        <video id="originalVideo" controls>
-                                            Your browser does not support the video tag.
-                                        </video>
-                                    </div>
+                                <div class="card-body">
+                                    <video id="originalVideo" class="w-100" controls>
+                                        Your browser does not support the video tag.
+                                    </video>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="card mb-4">
+                        <div class="col-md-6 mb-3">
+                            <div class="card">
                                 <div class="card-header">
-                                    <h5 class="mb-0">Processed Video with Detections</h5>
+                                    <h4>Processed Video</h4>
                                 </div>
-                                <div class="card-body p-0">
-                                    <div class="video-container">
-                                        <video id="resultVideo" controls>
-                                            Your browser does not support the video tag.
-                                        </video>
-                                    </div>
+                                <div class="card-body">
+                                    <video id="resultVideo" class="w-100" controls>
+                                        Your browser does not support the video tag.
+                                    </video>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="mb-0">Processing Summary</h5>
-                        </div>
-                        <div class="card-body">
-                            <div id="summaryMessage"></div>
-                        </div>
+                    <div class="mt-4">
+                        <h4><i class="fas fa-lightbulb me-2"></i>Usage Tips</h4>
+                        <ul>
+                            <li>Use the video controls to play, pause, and scrub through the videos</li>
+                            <li>Notice how road hazards are highlighted with red bounding boxes</li>
+                            <li>For longer videos, you can download the result for offline viewing</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -142,132 +117,186 @@
 
 {% block extra_js %}
 <script>
-    $(document).ready(function() {
-        // Handle drag and drop
-        const uploadArea = $('#uploadArea');
-        const videoInput = $('#videoInput');
-        const selectedVideoContainer = $('#selectedVideoContainer');
-        const selectedVideoName = $('#selectedVideoName');
+    document.addEventListener('DOMContentLoaded', function() {
+        // Elements
+        const dropZone = document.getElementById('dropZone');
+        const videoInput = document.getElementById('videoInput');
+        const processBtn = document.getElementById('processBtn');
+        const uploadDetails = document.getElementById('uploadDetails');
+        const fileInfo = document.getElementById('fileInfo');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const processingProgress = document.getElementById('processingProgress');
+        const resultsSection = document.getElementById('resultsSection');
+        const originalVideo = document.getElementById('originalVideo');
+        const resultVideo = document.getElementById('resultVideo');
+        const downloadResultBtn = document.getElementById('downloadResultBtn');
+        const summaryText = document.getElementById('summaryText');
         
-        uploadArea.on('click', function() {
+        // Selected file
+        let selectedFile = null;
+        
+        // Event listeners for drag and drop
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, highlight, false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, unhighlight, false);
+        });
+        
+        function highlight() {
+            dropZone.classList.add('active');
+        }
+        
+        function unhighlight() {
+            dropZone.classList.remove('active');
+        }
+        
+        // Handle file drop
+        dropZone.addEventListener('drop', handleDrop, false);
+        
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            
+            if (files.length > 0) {
+                handleFile(files[0]);
+            }
+        }
+        
+        // Handle file selection via click
+        dropZone.addEventListener('click', function() {
             videoInput.click();
         });
         
-        uploadArea.on('dragover', function(e) {
-            e.preventDefault();
-            uploadArea.addClass('bg-light');
-        });
-        
-        uploadArea.on('dragleave', function() {
-            uploadArea.removeClass('bg-light');
-        });
-        
-        uploadArea.on('drop', function(e) {
-            e.preventDefault();
-            uploadArea.removeClass('bg-light');
-            
-            const files = e.originalEvent.dataTransfer.files;
-            if (files.length > 0) {
-                videoInput[0].files = files;
-                updateSelectedVideo();
+        videoInput.addEventListener('change', function() {
+            if (this.files.length > 0) {
+                handleFile(this.files[0]);
             }
         });
         
-        videoInput.on('change', function() {
-            updateSelectedVideo();
-        });
-        
-        $('#clearVideoBtn').on('click', function() {
-            videoInput.val('');
-            selectedVideoContainer.hide();
-            uploadArea.show();
-        });
-        
-        function updateSelectedVideo() {
-            if (videoInput[0].files && videoInput[0].files[0]) {
-                const file = videoInput[0].files[0];
-                const fileSize = formatFileSize(file.size);
-                
-                selectedVideoName.html(`
-                    <strong>${file.name}</strong> (${fileSize})
-                `);
-                
-                selectedVideoContainer.show();
-                uploadArea.hide();
-            } else {
-                selectedVideoContainer.hide();
-                uploadArea.show();
-            }
-        }
-        
-        function formatFileSize(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            
-            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(1024));
-            
-            return parseFloat((bytes / Math.pow(1024, i)).toFixed(2)) + ' ' + sizes[i];
-        }
-        
-        // Form submission
-        $('#uploadForm').on('submit', function(e) {
-            e.preventDefault();
-            
-            if (!videoInput[0].files || videoInput[0].files.length === 0) {
-                showToast('Please select a video file first.', 'warning');
+        // Process the selected file
+        function handleFile(file) {
+            // Check if file type is valid
+            const validTypes = ['video/mp4', 'video/avi', 'video/quicktime', 'video/x-msvideo'];
+            if (!validTypes.includes(file.type)) {
+                showToast('Invalid file type. Please upload an MP4, AVI, or MOV video.', 'error');
                 return;
             }
             
-            const formData = new FormData();
-            formData.append('video', videoInput[0].files[0]);
+            // Check file size
+            const maxSize = 50 * 1024 * 1024; // 50MB
+            if (file.size > maxSize) {
+                showToast('File is too large. Maximum size is 50MB.', 'error');
+                return;
+            }
+            
+            // Store the selected file
+            selectedFile = file;
+            
+            // Show file details
+            fileInfo.innerHTML = `
+                <strong>Name:</strong> ${file.name}<br>
+                <strong>Size:</strong> ${formatFileSize(file.size)}<br>
+                <strong>Type:</strong> ${file.type}
+            `;
+            uploadDetails.classList.remove('d-none');
+            
+            // Enable process button
+            processBtn.disabled = false;
+            
+            // Hide previous results
+            resultsSection.classList.add('d-none');
+        }
+        
+        // Process video button
+        processBtn.addEventListener('click', function() {
+            if (!selectedFile) {
+                showToast('Please select a video first.', 'warning');
+                return;
+            }
             
             // Show loading indicator
-            $('#loadingIndicator').show();
-            $('#resultBox').hide();
+            loadingIndicator.classList.remove('d-none');
+            processBtn.disabled = true;
+            processingProgress.style.width = '10%';
             
-            // Submit via AJAX
-            $.ajax({
-                url: '/process_video',
-                type: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function(response) {
+            // Create form data
+            const formData = new FormData();
+            formData.append('video', selectedFile);
+            
+            // Simulate progress while processing
+            let progressInterval = setInterval(function() {
+                const currentWidth = parseInt(processingProgress.style.width);
+                if (currentWidth < 90) {
+                    processingProgress.style.width = (currentWidth + 1) + '%';
+                }
+            }, 1000);
+            
+            // Send API request
+            fetch('/process_video', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(data => {
+                        throw new Error(data.error || 'Network response was not ok');
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Clear progress interval
+                clearInterval(progressInterval);
+                processingProgress.style.width = '100%';
+                
+                setTimeout(() => {
                     // Hide loading indicator
-                    $('#loadingIndicator').hide();
+                    loadingIndicator.classList.add('d-none');
+                    
+                    // Update video sources
+                    originalVideo.src = data.original_video;
+                    resultVideo.src = data.result_video;
+                    
+                    // Update download button
+                    downloadResultBtn.href = data.result_video;
+                    
+                    // Update summary text
+                    summaryText.textContent = data.message;
                     
                     // Show results
-                    $('#originalVideo').attr('src', response.original_video);
-                    $('#resultVideo').attr('src', response.result_video);
+                    resultsSection.classList.remove('d-none');
                     
-                    // Force videos to load
-                    document.getElementById('originalVideo').load();
-                    document.getElementById('resultVideo').load();
+                    // Enable process button
+                    processBtn.disabled = false;
                     
-                    // Show summary message
-                    $('#summaryMessage').html(`
-                        <div class="alert alert-success">
-                            <i class="fas fa-check-circle me-2"></i>${response.message}
-                        </div>
-                    `);
-                    
-                    $('#resultBox').show();
-                    
-                    // Show success toast
+                    // Show success message
                     showToast('Video processed successfully!', 'success');
-                },
-                error: function(xhr, status, error) {
-                    // Hide loading indicator
-                    $('#loadingIndicator').hide();
-                    
-                    // Show error
-                    let errorMessage = 'An error occurred while processing the video.';
-                    if (xhr.responseJSON && xhr.responseJSON.error) {
-                        errorMessage = xhr.responseJSON.error;
-                    }
-                    
-                    showToast(errorMessage, 'error');
-                }
+                }, 1000);
+            })
+            .catch(error => {
+                // Clear progress interval
+                clearInterval(progressInterval);
+                
+                // Hide loading indicator
+                loadingIndicator.classList.add('d-none');
+                
+                // Enable process button
+                processBtn.disabled = false;
+                
+                // Show error message
+                console.error('Error:', error);
+                showToast('Error processing video: ' + error.message, 'error');
             });
         });
     });
