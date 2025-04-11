@@ -1,0 +1,300 @@
+{% extends "base.html" %}
+
+{% block title %}Road Obstacle Detection - Multiple Images{% endblock %}
+
+{% block extra_css %}
+<style>
+    .upload-area {
+        border: 2px dashed #3498db;
+        border-radius: 5px;
+        padding: 25px;
+        text-align: center;
+        margin-bottom: 20px;
+        background-color: #f8f9fa;
+        transition: all 0.3s ease;
+    }
+    
+    .upload-area:hover {
+        background-color: #e9ecef;
+        cursor: pointer;
+    }
+    
+    .selected-files {
+        margin-top: 15px;
+        max-height: 150px;
+        overflow-y: auto;
+    }
+    
+    .file-item {
+        padding: 5px 10px;
+        background-color: #e9ecef;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .loading {
+        display: none;
+        text-align: center;
+        margin: 20px 0;
+    }
+    
+    .results-container {
+        display: none;
+        margin-top: 30px;
+    }
+    
+    .result-item {
+        margin-bottom: 30px;
+        border-bottom: 1px solid #dee2e6;
+        padding-bottom: 20px;
+    }
+    
+    .obstacle-card {
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #f8f9fa;
+        border-left: 4px solid #3498db;
+    }
+    
+    .obstacle-card.hazard {
+        border-left-color: #dc3545;
+        background-color: #fff8f8;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card shadow border-0">
+            <div class="card-header bg-primary text-white">
+                <h2 class="mb-0"><i class="fas fa-images me-2"></i>Multiple Images Detection</h2>
+            </div>
+            <div class="card-body">
+                <p class="lead">Upload multiple images to batch process obstacle detection.</p>
+                
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <div class="upload-area" id="uploadArea">
+                        <i class="fas fa-cloud-upload-alt fa-3x text-primary mb-3"></i>
+                        <h4>Drop images here or click to browse</h4>
+                        <p class="text-muted">Supported formats: JPG, JPEG, PNG, BMP</p>
+                        <input type="file" id="imagesInput" name="images" accept=".jpg,.jpeg,.png,.bmp" multiple style="display: none;">
+                    </div>
+                    
+                    <div class="selected-files" id="selectedFiles">
+                        <!-- Selected files will be listed here -->
+                    </div>
+                    
+                    <div class="d-grid mt-3">
+                        <button type="submit" class="btn btn-primary" id="detectBtn">
+                            <i class="fas fa-search me-2"></i>Detect Obstacles in All Images
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="loading" id="loadingIndicator">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">Processing images... This may take a while.</p>
+                </div>
+                
+                <div class="results-container" id="resultsContainer">
+                    <h3 class="mb-4">Detection Results</h3>
+                    <div id="resultsContent">
+                        <!-- Results will be displayed here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    $(document).ready(function() {
+        // Handle drag and drop
+        const uploadArea = $('#uploadArea');
+        const imagesInput = $('#imagesInput');
+        const selectedFiles = $('#selectedFiles');
+        
+        uploadArea.on('click', function() {
+            imagesInput.click();
+        });
+        
+        uploadArea.on('dragover', function(e) {
+            e.preventDefault();
+            uploadArea.addClass('bg-light');
+        });
+        
+        uploadArea.on('dragleave', function() {
+            uploadArea.removeClass('bg-light');
+        });
+        
+        uploadArea.on('drop', function(e) {
+            e.preventDefault();
+            uploadArea.removeClass('bg-light');
+            
+            const files = e.originalEvent.dataTransfer.files;
+            if (files.length > 0) {
+                imagesInput[0].files = files;
+                updateFileList();
+            }
+        });
+        
+        imagesInput.on('change', function() {
+            updateFileList();
+        });
+        
+        function updateFileList() {
+            selectedFiles.empty();
+            
+            const files = imagesInput[0].files;
+            if (files.length > 0) {
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    const fileItem = $(`
+                        <div class="file-item">
+                            <div>
+                                <i class="fas fa-file-image me-2"></i>
+                                ${file.name}
+                            </div>
+                            <small>${formatFileSize(file.size)}</small>
+                        </div>
+                    `);
+                    
+                    selectedFiles.append(fileItem);
+                }
+            }
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(1024));
+            
+            return parseFloat((bytes / Math.pow(1024, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+        
+        // Form submission
+        $('#uploadForm').on('submit', function(e) {
+            e.preventDefault();
+            
+            if (!imagesInput[0].files || imagesInput[0].files.length === 0) {
+                alert('Please select at least one image.');
+                return;
+            }
+            
+            const formData = new FormData();
+            const files = imagesInput[0].files;
+            
+            for (let i = 0; i < files.length; i++) {
+                formData.append('images', files[i]);
+            }
+            
+            // Show loading indicator
+            $('#loadingIndicator').show();
+            $('#resultsContainer').hide();
+            
+            // Submit via AJAX
+            $.ajax({
+                url: '/process_multiple_images',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    // Hide loading indicator
+                    $('#loadingIndicator').hide();
+                    
+                    // Show results
+                    const resultsContent = $('#resultsContent');
+                    resultsContent.empty();
+                    
+                    if (response.results && response.results.length > 0) {
+                        response.results.forEach(function(result, index) {
+                            const resultItem = $(`
+                                <div class="result-item">
+                                    <h4>Image ${index + 1}: ${result.filename}</h4>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="card mb-3">
+                                                <div class="card-header">Original Image</div>
+                                                <img src="${result.original_image}" class="img-fluid" alt="Original Image">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card mb-3">
+                                                <div class="card-header">Detected Obstacles</div>
+                                                <img src="${result.result_image}" class="img-fluid" alt="Result Image">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="mb-0">Detection Summary (${result.count} obstacles)</h5>
+                                        </div>
+                                        <div class="card-body obstacle-summary">
+                                            <!-- Obstacles will be listed here -->
+                                        </div>
+                                    </div>
+                                </div>
+                            `);
+                            
+                            const obstacleSummary = resultItem.find('.obstacle-summary');
+                            
+                            if (result.obstacles.length > 0) {
+                                result.obstacles.forEach(function(obstacle, idx) {
+                                    const isHazard = obstacle.is_road_hazard;
+                                    const hazardClass = isHazard ? 'hazard' : '';
+                                    const hazardBadge = isHazard ? '<span class="hazard-indicator ms-2">HAZARD</span>' : '';
+                                    
+                                    const obstacleCard = $(`
+                                        <div class="obstacle-card ${hazardClass}">
+                                            <div class="d-flex justify-content-between">
+                                                <h5 class="mb-1">Obstacle ${idx + 1}: ${obstacle.class} ${hazardBadge}</h5>
+                                                <span class="badge bg-primary">${(obstacle.confidence * 100).toFixed(1)}%</span>
+                                            </div>
+                                        </div>
+                                    `);
+                                    
+                                    obstacleSummary.append(obstacleCard);
+                                });
+                            } else {
+                                obstacleSummary.html('<p class="text-muted">No obstacles detected in this image.</p>');
+                            }
+                            
+                            resultsContent.append(resultItem);
+                        });
+                    } else {
+                        resultsContent.html('<div class="alert alert-info">No valid results returned.</div>');
+                    }
+                    
+                    $('#resultsContainer').show();
+                    
+                    // Show success toast
+                    showToast(`Successfully processed ${response.results.length} images`, 'success');
+                },
+                error: function(xhr, status, error) {
+                    // Hide loading indicator
+                    $('#loadingIndicator').hide();
+                    
+                    // Show error
+                    let errorMessage = 'An error occurred while processing the images.';
+                    if (xhr.responseJSON && xhr.responseJSON.error) {
+                        errorMessage = xhr.responseJSON.error;
+                    }
+                    
+                    showToast(errorMessage, 'error');
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

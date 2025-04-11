@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Road Obstacle Detection - Webcam{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card shadow border-0">
+            <div class="card-header bg-primary text-white">
+                <h2 class="mb-0"><i class="fas fa-camera me-2"></i>Webcam Detection</h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        <div class="alert alert-info">
+                            <p><i class="fas fa-info-circle me-2"></i> Click the "Start Webcam" button to begin real-time detection. This feature requires camera access permission.</p>
+                        </div>
+
+                        <div class="text-center mb-3">
+                            <button id="start-webcam" class="btn btn-success me-2">
+                                <i class="fas fa-video me-1"></i> Start Webcam
+                            </button>
+                            <button id="stop-webcam" class="btn btn-danger" disabled>
+                                <i class="fas fa-stop-circle me-1"></i> Stop Webcam
+                            </button>
+                        </div>
+
+                        <div class="webcam-container text-center mb-4">
+                            <div id="loading-indicator" style="display: none;" class="py-5">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <p>Starting webcam feed...</p>
+                            </div>
+                            <div id="video-container">
+                                <img id="webcam-feed" src="" class="img-fluid rounded" style="max-width: 100%; display: none;">
+                            </div>
+                        </div>
+
+                        <div id="detection-results" class="mt-4" style="display: none;">
+                            <div class="card">
+                                <div class="card-header bg-light">
+                                    <h4 class="mb-0">Real-time Detection Results</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div id="objects-detected">
+                                        <p class="text-center text-muted">Waiting for detections...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/detection.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        setupWebcamDetection();
+    });
+</script>
+{% endblock %}
