@@ -2,113 +2,73 @@
 
 {% block title %}Road Obstacle Detection - Multiple Images{% endblock %}
 
-{% block extra_css %}
-<style>
-    .upload-area {
-        border: 2px dashed #3498db;
-        border-radius: 5px;
-        padding: 25px;
-        text-align: center;
-        margin-bottom: 20px;
-        background-color: #f8f9fa;
-        transition: all 0.3s ease;
-    }
-    
-    .upload-area:hover {
-        background-color: #e9ecef;
-        cursor: pointer;
-    }
-    
-    .selected-files {
-        margin-top: 15px;
-        max-height: 150px;
-        overflow-y: auto;
-    }
-    
-    .file-item {
-        padding: 5px 10px;
-        background-color: #e9ecef;
-        border-radius: 5px;
-        margin-bottom: 5px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    
-    .loading {
-        display: none;
-        text-align: center;
-        margin: 20px 0;
-    }
-    
-    .results-container {
-        display: none;
-        margin-top: 30px;
-    }
-    
-    .result-item {
-        margin-bottom: 30px;
-        border-bottom: 1px solid #dee2e6;
-        padding-bottom: 20px;
-    }
-    
-    .obstacle-card {
-        margin-bottom: 10px;
-        padding: 10px;
-        border-radius: 5px;
-        background-color: #f8f9fa;
-        border-left: 4px solid #3498db;
-    }
-    
-    .obstacle-card.hazard {
-        border-left-color: #dc3545;
-        background-color: #fff8f8;
-    }
-</style>
-{% endblock %}
-
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-10">
-        <div class="card shadow border-0">
-            <div class="card-header bg-primary text-white">
-                <h2 class="mb-0"><i class="fas fa-images me-2"></i>Multiple Images Detection</h2>
+<div class="row">
+    <div class="col-12">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2><i class="fas fa-images me-2"></i>Multiple Images Obstacle Detection</h2>
             </div>
             <div class="card-body">
-                <p class="lead">Upload multiple images to batch process obstacle detection.</p>
-                
-                <form id="uploadForm" enctype="multipart/form-data">
-                    <div class="upload-area" id="uploadArea">
-                        <i class="fas fa-cloud-upload-alt fa-3x text-primary mb-3"></i>
-                        <h4>Drop images here or click to browse</h4>
-                        <p class="text-muted">Supported formats: JPG, JPEG, PNG, BMP</p>
-                        <input type="file" id="imagesInput" name="images" accept=".jpg,.jpeg,.png,.bmp" multiple style="display: none;">
+                <p>Upload multiple road scene images to detect and highlight potential obstacles and hazards in batch.</p>
+                <div class="alert alert-info" role="alert">
+                    <i class="fas fa-info-circle me-2"></i>Supported formats: JPG, JPEG, PNG, BMP. Maximum file size: 50MB per image. Maximum 10 images at once.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Upload Images</h3>
+            </div>
+            <div class="card-body">
+                <div id="dropZone" class="drop-zone mb-3">
+                    <div class="drop-zone-prompt">
+                        <i class="fas fa-cloud-upload-alt fa-3x mb-3"></i>
+                        <p>Drag & drop images here or click to browse</p>
+                        <input type="file" id="imagesInput" accept=".jpg,.jpeg,.png,.bmp" multiple class="d-none">
                     </div>
-                    
-                    <div class="selected-files" id="selectedFiles">
-                        <!-- Selected files will be listed here -->
-                    </div>
-                    
-                    <div class="d-grid mt-3">
-                        <button type="submit" class="btn btn-primary" id="detectBtn">
-                            <i class="fas fa-search me-2"></i>Detect Obstacles in All Images
-                        </button>
-                    </div>
-                </form>
-                
-                <div class="loading" id="loadingIndicator">
+                </div>
+                <div id="uploadedFiles" class="mb-3 d-none">
+                    <h4>Selected Images:</h4>
+                    <ul id="fileList" class="list-group">
+                        <!-- Files will be listed here -->
+                    </ul>
+                </div>
+                <div class="d-grid">
+                    <button id="processBtn" class="btn btn-primary" disabled>
+                        <i class="fas fa-cogs me-2"></i>Process Images
+                    </button>
+                </div>
+                <div id="loadingIndicator" class="text-center my-3 d-none">
                     <div class="spinner-border text-primary" role="status">
                         <span class="visually-hidden">Loading...</span>
                     </div>
-                    <p class="mt-2">Processing images... This may take a while.</p>
+                    <p id="processingStatus">Processing images... (0/0)</p>
                 </div>
-                
-                <div class="results-container" id="resultsContainer">
-                    <h3 class="mb-4">Detection Results</h3>
-                    <div id="resultsContent">
-                        <!-- Results will be displayed here -->
-                    </div>
-                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="resultsSection" class="d-none">
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3>Detection Results</h3>
+        </div>
+        <div class="card-body">
+            <div id="noResultsMessage" class="alert alert-info d-none">
+                <i class="fas fa-info-circle me-2"></i>No valid images were processed.
+            </div>
+            <div id="resultsSummary" class="alert alert-success d-none">
+                <i class="fas fa-check-circle me-2"></i><span id="summaryText"></span>
+            </div>
+            <div id="resultsContainer">
+                <!-- Results will be displayed here -->
             </div>
         </div>
     </div>
@@ -117,182 +77,277 @@
 
 {% block extra_js %}
 <script>
-    $(document).ready(function() {
-        // Handle drag and drop
-        const uploadArea = $('#uploadArea');
-        const imagesInput = $('#imagesInput');
-        const selectedFiles = $('#selectedFiles');
+    document.addEventListener('DOMContentLoaded', function() {
+        // Elements
+        const dropZone = document.getElementById('dropZone');
+        const imagesInput = document.getElementById('imagesInput');
+        const uploadedFiles = document.getElementById('uploadedFiles');
+        const fileList = document.getElementById('fileList');
+        const processBtn = document.getElementById('processBtn');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const processingStatus = document.getElementById('processingStatus');
+        const resultsSection = document.getElementById('resultsSection');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const noResultsMessage = document.getElementById('noResultsMessage');
+        const resultsSummary = document.getElementById('resultsSummary');
+        const summaryText = document.getElementById('summaryText');
         
-        uploadArea.on('click', function() {
+        // Selected files
+        let selectedFiles = [];
+        const MAX_FILES = 10;
+        
+        // Event listeners for drag and drop
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, highlight, false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, unhighlight, false);
+        });
+        
+        function highlight() {
+            dropZone.classList.add('active');
+        }
+        
+        function unhighlight() {
+            dropZone.classList.remove('active');
+        }
+        
+        // Handle file drop
+        dropZone.addEventListener('drop', handleDrop, false);
+        
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            
+            if (files.length > 0) {
+                handleFiles(files);
+            }
+        }
+        
+        // Handle file selection via click
+        dropZone.addEventListener('click', function() {
             imagesInput.click();
         });
         
-        uploadArea.on('dragover', function(e) {
-            e.preventDefault();
-            uploadArea.addClass('bg-light');
-        });
-        
-        uploadArea.on('dragleave', function() {
-            uploadArea.removeClass('bg-light');
-        });
-        
-        uploadArea.on('drop', function(e) {
-            e.preventDefault();
-            uploadArea.removeClass('bg-light');
-            
-            const files = e.originalEvent.dataTransfer.files;
-            if (files.length > 0) {
-                imagesInput[0].files = files;
-                updateFileList();
+        imagesInput.addEventListener('change', function() {
+            if (this.files.length > 0) {
+                handleFiles(this.files);
             }
         });
         
-        imagesInput.on('change', function() {
-            updateFileList();
-        });
-        
-        function updateFileList() {
-            selectedFiles.empty();
-            
-            const files = imagesInput[0].files;
-            if (files.length > 0) {
-                for (let i = 0; i < files.length; i++) {
-                    const file = files[i];
-                    const fileItem = $(`
-                        <div class="file-item">
-                            <div>
-                                <i class="fas fa-file-image me-2"></i>
-                                ${file.name}
-                            </div>
-                            <small>${formatFileSize(file.size)}</small>
-                        </div>
-                    `);
-                    
-                    selectedFiles.append(fileItem);
-                }
-            }
-        }
-        
-        function formatFileSize(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            
-            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(1024));
-            
-            return parseFloat((bytes / Math.pow(1024, i)).toFixed(2)) + ' ' + sizes[i];
-        }
-        
-        // Form submission
-        $('#uploadForm').on('submit', function(e) {
-            e.preventDefault();
-            
-            if (!imagesInput[0].files || imagesInput[0].files.length === 0) {
-                alert('Please select at least one image.');
+        // Process multiple files
+        function handleFiles(files) {
+            // Check if too many files are selected
+            if (files.length > MAX_FILES) {
+                showToast(`Too many files selected. Maximum ${MAX_FILES} images allowed.`, 'warning');
                 return;
             }
             
-            const formData = new FormData();
-            const files = imagesInput[0].files;
+            // Reset selected files
+            selectedFiles = [];
+            fileList.innerHTML = '';
             
-            for (let i = 0; i < files.length; i++) {
-                formData.append('images', files[i]);
+            // Process each file
+            Array.from(files).forEach((file, index) => {
+                // Check if file type is valid
+                const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/bmp'];
+                if (!validTypes.includes(file.type)) {
+                    showToast(`File "${file.name}" is not a valid image type.`, 'warning');
+                    return;
+                }
+                
+                // Check file size
+                const maxSize = 50 * 1024 * 1024; // 50MB
+                if (file.size > maxSize) {
+                    showToast(`File "${file.name}" is too large. Maximum size is 50MB.`, 'warning');
+                    return;
+                }
+                
+                // Add to selected files
+                selectedFiles.push(file);
+                
+                // Add to file list UI
+                const listItem = document.createElement('li');
+                listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+                listItem.innerHTML = `
+                    <div>
+                        <span class="badge bg-primary rounded-pill me-2">${index + 1}</span>
+                        ${file.name}
+                    </div>
+                    <span class="text-muted">${formatFileSize(file.size)}</span>
+                `;
+                fileList.appendChild(listItem);
+            });
+            
+            // Show file list if any valid files
+            if (selectedFiles.length > 0) {
+                uploadedFiles.classList.remove('d-none');
+                processBtn.disabled = false;
+            } else {
+                uploadedFiles.classList.add('d-none');
+                processBtn.disabled = true;
+            }
+            
+            // Hide previous results
+            resultsSection.classList.add('d-none');
+        }
+        
+        // Process images button
+        processBtn.addEventListener('click', function() {
+            if (selectedFiles.length === 0) {
+                showToast('Please select at least one image first.', 'warning');
+                return;
             }
             
             // Show loading indicator
-            $('#loadingIndicator').show();
-            $('#resultsContainer').hide();
+            loadingIndicator.classList.remove('d-none');
+            processBtn.disabled = true;
+            processingStatus.textContent = `Processing images... (0/${selectedFiles.length})`;
             
-            // Submit via AJAX
-            $.ajax({
-                url: '/process_multiple_images',
-                type: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    // Hide loading indicator
-                    $('#loadingIndicator').hide();
+            // Clear previous results
+            resultsContainer.innerHTML = '';
+            
+            // Create form data
+            const formData = new FormData();
+            selectedFiles.forEach(file => {
+                formData.append('images', file);
+            });
+            
+            // Send API request
+            fetch('/process_multiple_images', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(data => {
+                        throw new Error(data.error || 'Network response was not ok');
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Hide loading indicator
+                loadingIndicator.classList.add('d-none');
+                
+                // Show results section
+                resultsSection.classList.remove('d-none');
+                
+                // Handle results
+                if (!data.results || data.results.length === 0) {
+                    noResultsMessage.classList.remove('d-none');
+                    resultsSummary.classList.add('d-none');
+                } else {
+                    noResultsMessage.classList.add('d-none');
+                    resultsSummary.classList.remove('d-none');
                     
-                    // Show results
-                    const resultsContent = $('#resultsContent');
-                    resultsContent.empty();
+                    // Summarize results
+                    const totalImages = data.results.length;
+                    const totalObjects = data.results.reduce((sum, result) => sum + result.count, 0);
+                    const totalHazards = data.results.reduce((sum, result) => {
+                        return sum + result.obstacles.filter(o => o.is_road_hazard).length;
+                    }, 0);
                     
-                    if (response.results && response.results.length > 0) {
-                        response.results.forEach(function(result, index) {
-                            const resultItem = $(`
-                                <div class="result-item">
-                                    <h4>Image ${index + 1}: ${result.filename}</h4>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="card mb-3">
-                                                <div class="card-header">Original Image</div>
-                                                <img src="${result.original_image}" class="img-fluid" alt="Original Image">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="card mb-3">
-                                                <div class="card-header">Detected Obstacles</div>
-                                                <img src="${result.result_image}" class="img-fluid" alt="Result Image">
-                                            </div>
-                                        </div>
+                    summaryText.textContent = `Processed ${totalImages} images with ${totalObjects} objects detected (${totalHazards} road hazards).`;
+                    
+                    // Create result cards for each image
+                    data.results.forEach((result, index) => {
+                        const hazardCount = result.obstacles.filter(o => o.is_road_hazard).length;
+                        
+                        const resultCard = document.createElement('div');
+                        resultCard.className = 'card mb-4';
+                        
+                        // Add hazard indicator to card if hazards detected
+                        if (hazardCount > 0) {
+                            resultCard.classList.add('border-danger');
+                        }
+                        
+                        resultCard.innerHTML = `
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h4>Image ${index + 1}: ${result.filename}</h4>
+                                <a href="${result.result_image}" download="result_${index + 1}.jpg" class="btn btn-sm btn-success">
+                                    <i class="fas fa-download me-1"></i>Download
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <h5>Original</h5>
+                                        <img src="${result.original_image}" class="img-fluid rounded" alt="Original image">
                                     </div>
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h5 class="mb-0">Detection Summary (${result.count} obstacles)</h5>
-                                        </div>
-                                        <div class="card-body obstacle-summary">
-                                            <!-- Obstacles will be listed here -->
-                                        </div>
+                                    <div class="col-md-6 mb-3">
+                                        <h5>Detection Result</h5>
+                                        <img src="${result.result_image}" class="img-fluid rounded" alt="Result image">
                                     </div>
                                 </div>
-                            `);
-                            
-                            const obstacleSummary = resultItem.find('.obstacle-summary');
-                            
-                            if (result.obstacles.length > 0) {
-                                result.obstacles.forEach(function(obstacle, idx) {
-                                    const isHazard = obstacle.is_road_hazard;
-                                    const hazardClass = isHazard ? 'hazard' : '';
-                                    const hazardBadge = isHazard ? '<span class="hazard-indicator ms-2">HAZARD</span>' : '';
-                                    
-                                    const obstacleCard = $(`
-                                        <div class="obstacle-card ${hazardClass}">
-                                            <div class="d-flex justify-content-between">
-                                                <h5 class="mb-1">Obstacle ${idx + 1}: ${obstacle.class} ${hazardBadge}</h5>
-                                                <span class="badge bg-primary">${(obstacle.confidence * 100).toFixed(1)}%</span>
-                                            </div>
+                                <div class="mt-3">
+                                    <h5>Detected Objects (${result.count})</h5>
+                                    ${result.count > 0 ? `
+                                        <div class="table-responsive">
+                                            <table class="table table-sm table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Type</th>
+                                                        <th>Confidence</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    ${result.obstacles.map((obj, objIndex) => `
+                                                        <tr ${obj.is_road_hazard ? 'class="table-danger"' : ''}>
+                                                            <td>${objIndex + 1}</td>
+                                                            <td>${obj.class}</td>
+                                                            <td>${formatConfidence(obj.confidence)}</td>
+                                                            <td>${obj.is_road_hazard ? 
+                                                                '<span class="hazard-badge">ROAD HAZARD</span>' : 
+                                                                '<span class="badge bg-secondary">Normal</span>'}
+                                                            </td>
+                                                        </tr>
+                                                    `).join('')}
+                                                </tbody>
+                                            </table>
                                         </div>
-                                    `);
-                                    
-                                    obstacleSummary.append(obstacleCard);
-                                });
-                            } else {
-                                obstacleSummary.html('<p class="text-muted">No obstacles detected in this image.</p>');
-                            }
-                            
-                            resultsContent.append(resultItem);
-                        });
-                    } else {
-                        resultsContent.html('<div class="alert alert-info">No valid results returned.</div>');
-                    }
-                    
-                    $('#resultsContainer').show();
-                    
-                    // Show success toast
-                    showToast(`Successfully processed ${response.results.length} images`, 'success');
-                },
-                error: function(xhr, status, error) {
-                    // Hide loading indicator
-                    $('#loadingIndicator').hide();
-                    
-                    // Show error
-                    let errorMessage = 'An error occurred while processing the images.';
-                    if (xhr.responseJSON && xhr.responseJSON.error) {
-                        errorMessage = xhr.responseJSON.error;
-                    }
-                    
-                    showToast(errorMessage, 'error');
+                                    ` : '<div class="alert alert-info">No objects detected</div>'}
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">
+                                    <strong>Road Hazards:</strong> ${hazardCount} of ${result.count} objects
+                                </small>
+                            </div>
+                        `;
+                        
+                        resultsContainer.appendChild(resultCard);
+                    });
                 }
+                
+                // Enable process button
+                processBtn.disabled = false;
+                
+                // Show success message
+                showToast('All images processed successfully!', 'success');
+            })
+            .catch(error => {
+                // Hide loading indicator
+                loadingIndicator.classList.add('d-none');
+                
+                // Enable process button
+                processBtn.disabled = false;
+                
+                // Show error message
+                console.error('Error:', error);
+                showToast('Error processing images: ' + error.message, 'error');
             });
         });
     });
