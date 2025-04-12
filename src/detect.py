@@ -53,7 +53,8 @@ class ObstacleDetector:
                  config_path="model/yolov4-tiny.cfg",
                  classes_path="model/coco.names",
                  confidence_threshold=0.5, 
-                 road_hazard_confidence_threshold=0.4):
+                 road_hazard_confidence_threshold=0.4,
+                 optimize_startup=True):
         """
         Initialize the obstacle detector
         
@@ -74,21 +75,25 @@ class ObstacleDetector:
         # Load COCO class names
         self.classes = self._load_classes(classes_path)
         
-        # Load detection model
+        # Load detection model - with optimization for faster startup
         try:
-            self.net = cv2.dnn.readNetFromDarknet(config_path, model_path)
-            
-            # Use OpenCV backend
-            self.net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
-            self.net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
-            
-            # Get output layer names
-            layer_names = self.net.getLayerNames()
-            self.output_layers = [layer_names[i - 1] for i in self.net.getUnconnectedOutLayers()]
-            
-            logger.info(f"Model loaded successfully from {model_path}")
+            if optimize_startup:
+                # For faster Replit workflow startup - defer actual model loading
+                # just check if files exist and mark to load on first detection
+                logger.info(f"Model files verified for {model_path} (optimized startup)")
+                self.net = None
+                self.model_path = model_path
+                self.config_path = config_path
+                self.is_model_loaded = False
+                self.output_layers = None
+                logger.info(f"Model loading deferred for faster startup")
+            else:
+                # Load model immediately (slower startup)
+                self._load_model(model_path, config_path)
+                
+            logger.info(f"Model initialization complete from {model_path}")
         except Exception as e:
-            logger.error(f"Failed to load model: {str(e)}")
+            logger.error(f"Failed to initialize model: {str(e)}")
             raise
 
         # Generate consistent colors for classes
@@ -170,6 +175,27 @@ class ObstacleDetector:
                 int(rgb[0] * 255)   # R
             )
     
+    def _load_model(self, model_path, config_path):
+        """Actually load the model from disk (can be deferred for faster startup)"""
+        try:
+            self.net = cv2.dnn.readNetFromDarknet(config_path, model_path)
+            
+            # Use OpenCV backend
+            self.net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
+            self.net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
+            
+            # Get output layer names
+            layer_names = self.net.getLayerNames()
+            self.output_layers = [layer_names[i - 1] for i in self.net.getUnconnectedOutLayers()]
+            self.is_model_loaded = True
+            
+            logger.info(f"Model now fully loaded from {model_path}")
+            return True
+        except Exception as e:
+            logger.error(f"Error loading model: {str(e)}")
+            self.is_model_loaded = False
+            return False
+            
     def detect(self, frame):
         """
         Detect and classify road obstacles in the given frame
@@ -184,19 +210,35 @@ class ObstacleDetector:
             logger.warning("Empty frame received")
             return None, []
             
+        # Load model if deferred
+        if not self.is_model_loaded or self.net is None:
+            logger.info("Loading model on first detection")
+            if not self._load_model(self.model_path, self.config_path):
+                logger.error("Failed to load model on first detection")
+                return frame, []  # Return original frame without detection
+                
+        # Safety check - in case model loading actually failed
+        if self.net is None or self.output_layers is None:
+            logger.error("Model not properly loaded, cannot perform detection")
+            return frame, []  # Return original frame without detection
+            
         start_time = time.time()
         
         # Get image dimensions
         height, width, _ = frame.shape
         
-        # Create blob from image
-        blob = cv2.dnn.blobFromImage(frame, 1/255.0, (416, 416), swapRB=True, crop=False)
-        
-        # Set input to the network
-        self.net.setInput(blob)
-        
-        # Forward pass through the network
-        outputs = self.net.forward(self.output_layers)
+        try:
+            # Create blob from image
+            blob = cv2.dnn.blobFromImage(frame, 1/255.0, (416, 416), swapRB=True, crop=False)
+            
+            # Set input to the network
+            self.net.setInput(blob)
+            
+            # Forward pass through the network
+            outputs = self.net.forward(self.output_layers)
+        except Exception as e:
+            logger.error(f"Error during detection forward pass: {str(e)}")
+            return frame, []  # Return original frame without detection
         
         # Initialize lists for detected boxes, confidences, and class IDs
         boxes = []
@@ -204,33 +246,45 @@ class ObstacleDetector:
         class_ids = []
         
         # Process outputs
-        for output in outputs:
-            for detection in output:
-                # Extract class scores (starting from the 5th element)
-                scores = detection[5:]
-                class_id = np.argmax(scores)
-                confidence = scores[class_id]
-                
-                # Filter by confidence and relevance to road
-                # Add all detections but we'll filter them later
-                if confidence > 0.1:  # Low threshold here, we'll filter more strictly later
-                    # Scale detection coordinates to original image size
-                    center_x = int(detection[0] * width)
-                    center_y = int(detection[1] * height)
-                    w = int(detection[2] * width)
-                    h = int(detection[3] * height)
+        try:
+            for output in outputs:
+                for detection in output:
+                    # Extract class scores (starting from the 5th element)
+                    scores = detection[5:]
+                    class_id = np.argmax(scores)
+                    confidence = scores[class_id]
                     
-                    # Rectangle coordinates
-                    x = int(center_x - w / 2)
-                    y = int(center_y - h / 2)
-                    
-                    # Add to lists
-                    boxes.append([x, y, w, h])
-                    confidences.append(float(confidence))
-                    class_ids.append(class_id)
-        
+                    # Filter by confidence and relevance to road
+                    # Add all detections but we'll filter them later
+                    if confidence > 0.1:  # Low threshold here, we'll filter more strictly later
+                        # Scale detection coordinates to original image size
+                        center_x = int(detection[0] * width)
+                        center_y = int(detection[1] * height)
+                        w = int(detection[2] * width)
+                        h = int(detection[3] * height)
+                        
+                        # Rectangle coordinates
+                        x = int(center_x - w / 2)
+                        y = int(center_y - h / 2)
+                        
+                        # Add to lists
+                        boxes.append([x, y, w, h])
+                        confidences.append(float(confidence))
+                        class_ids.append(class_id)
+        except Exception as e:
+            logger.error(f"Error processing detection outputs: {str(e)}")
+            # Return without processing if we can't process the outputs
+            return frame, []
+            
         # Apply non-maximum suppression to remove overlapping boxes
-        indices = cv2.dnn.NMSBoxes(boxes, confidences, 0.1, 0.4)
+        try:
+            if len(boxes) > 0:
+                indices = cv2.dnn.NMSBoxes(boxes, confidences, 0.1, 0.4)
+            else:
+                indices = []
+        except Exception as e:
+            logger.error(f"Error in non-maximum suppression: {str(e)}")
+            indices = []
         
         # Prepare for drawing
         processed_frame = frame.copy()

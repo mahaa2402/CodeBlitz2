@@ -7,10 +7,10 @@ import uuid
 from flask import Flask, render_template, request, jsonify, flash, redirect, url_for, Response, session
 from werkzeug.utils import secure_filename
 import base64
-from src.detect import ObstacleDetector
+from detector_adapter import DetectorAdapter
 
 # Configure logging
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Initialize Flask app
@@ -32,15 +32,10 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['RESULTS_FOLDER'] = RESULTS_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 50MB max upload size
 
-# Initialize detector with default settings
+# Initialize detector adapter with default settings
 try:
-    obstacle_detector = ObstacleDetector(
-        model_path="model/yolov4-tiny.weights", 
-        config_path="model/yolov4-tiny.cfg",
-        classes_path="model/coco.names",
-        confidence_threshold=0.5, 
-        road_hazard_confidence_threshold=0.4
-    )
+    # Use the adapter to handle parameter inconsistencies
+    obstacle_detector = DetectorAdapter()
     logger.info("Detector initialized successfully")
 except Exception as e:
     logger.error(f"Error initializing detector: {str(e)}")
@@ -112,9 +107,11 @@ def update_settings():
             return redirect(url_for('settings'))
             
         # Update detector settings
-        obstacle_detector.confidence_threshold = confidence_threshold
-        obstacle_detector.road_hazard_confidence_threshold = road_hazard_confidence_threshold
-        obstacle_detector.road_hazard_priority = enable_road_hazard_priority
+        obstacle_detector.update_settings(
+            confidence=confidence_threshold,
+            road_hazard_confidence=road_hazard_confidence_threshold,
+            enable_road_hazard_priority=enable_road_hazard_priority
+        )
         
         # Save settings in session
         session['confidence_threshold'] = confidence_threshold
