@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Road Obstacle Detection - Home</title>
+    <!-- Bootstrap dark theme CSS -->
+    <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        .navbar {
+            margin-bottom: 20px;
+        }
+        .feature-list li {
+            margin-bottom: 10px;
+        }
+        footer {
+            margin-top: 30px;
+            padding: 20px 0;
+        }
+        /* Add Toast container styling */
+        #toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1050;
+        }
+        .drop-zone {
+            border: 2px dashed var(--bs-border-color);
+            border-radius: 5px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .drop-zone:hover {
+            border-color: var(--bs-primary);
+            background-color: rgba(var(--bs-primary-rgb), 0.05);
+        }
+        .drop-zone.active {
+            border-color: var(--bs-success);
+            background-color: rgba(var(--bs-success-rgb), 0.05);
+        }
+        .hazard-badge {
+            background-color: #dc3545;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark rounded shadow">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">
+                    <i class="fas fa-road me-2"></i>Road Obstacle Detection
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/">
+                                <i class="fas fa-home me-1"></i> Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="/image_detection">
+                                <i class="fas fa-image me-1"></i> Single Image
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="/multiple_images_detection">
+                                <i class="fas fa-images me-1"></i> Multiple Images
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="/video_detection">
+                                <i class="fas fa-video me-1"></i> Video
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="/webcam_detection">
+                                <i class="fas fa-camera me-1"></i> Webcam
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="/settings">
+                                <i class="fas fa-cog me-1"></i> Settings
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Flash messages -->
+        
+            
+        
+
+        <!-- Toast container for JavaScript notifications -->
+        <div id="toast-container"></div>
+
+        <!-- Main content -->
+        <main class="py-3">
+            
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h2 class="card-title">Road Obstacle Detection System</h2>
+                <p class="lead">
+                    A smart computer vision solution for real-time detection of road obstacles and hazards.
+                </p>
+                <p>
+                    This system uses advanced computer vision technology to identify potential hazards and obstacles on roads,
+                    helping to improve safety for drivers, pedestrians, and autonomous vehicles.
+                </p>
+                <div class="alert alert-info">
+                    <h5><i class="fas fa-info-circle me-2"></i>Getting Started</h5>
+                    <p>Choose one of the detection methods from the navigation bar to begin analyzing road scenes.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3><i class="fas fa-cogs me-2"></i>Features</h3>
+            </div>
+            <div class="card-body">
+                <ul class="feature-list">
+                    <li>
+                        <strong><i class="fas fa-image me-2"></i>Single Image Detection:</strong>
+                        Upload and analyze a single image to detect road obstacles.
+                    </li>
+                    <li>
+                        <strong><i class="fas fa-images me-2"></i>Multiple Images Detection:</strong>
+                        Process multiple images in a batch for efficient analysis.
+                    </li>
+                    <li>
+                        <strong><i class="fas fa-video me-2"></i>Video Detection:</strong>
+                        Analyze video footage to identify moving and stationary obstacles.
+                    </li>
+                    <li>
+                        <strong><i class="fas fa-camera me-2"></i>Webcam Detection:</strong>
+                        Real-time detection using your webcam feed.
+                    </li>
+                    <li>
+                        <strong><i class="fas fa-exclamation-triangle me-2"></i>Road Hazard Prioritization:</strong>
+                        Special highlighting for critical road hazards that require immediate attention.
+                    </li>
+                    <li>
+                        <strong><i class="fas fa-tachometer-alt me-2"></i>Adjustable Detection Sensitivity:</strong>
+                        Customize confidence thresholds to balance detection accuracy and false positives.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3><i class="fas fa-rocket me-2"></i>Quick Start</h3>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-3">
+                    <a href="/image_detection" class="btn btn-primary">
+                        <i class="fas fa-image me-2"></i>Single Image
+                    </a>
+                    <a href="/multiple_images_detection" class="btn btn-primary">
+                        <i class="fas fa-images me-2"></i>Multiple Images
+                    </a>
+                    <a href="/video_detection" class="btn btn-primary">
+                        <i class="fas fa-video me-2"></i>Video
+                    </a>
+                    <a href="/webcam_detection" class="btn btn-primary">
+                        <i class="fas fa-camera me-2"></i>Webcam
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3><i class="fas fa-info-circle me-2"></i>About</h3>
+            </div>
+            <div class="card-body">
+                <p>
+                    This system uses an OpenCV-based computer vision model to identify various types of objects that could 
+                    be obstacles on roads, including:
+                </p>
+                <ul>
+                    <li>Pedestrians</li>
+                    <li>Vehicles (cars, trucks, buses)</li>
+                    <li>Cyclists</li>
+                    <li>Animals</li>
+                    <li>Traffic elements (signals, signs)</li>
+                </ul>
+                <p>
+                    Objects are categorized as potential road hazards based on their type and position, 
+                    with special visual indicators for critical obstacles.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center rounded shadow">
+            <div class="container">
+                <p class="mb-0">
+                    <i class="fas fa-road me-2"></i>Road Obstacle Detection System
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- jQuery first, then Bootstrap JS Bundle with Popper -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        // Toast notification function
+        function showToast(message, type = 'info') {
+            const toastContainer = document.getElementById('toast-container');
+            const toastId = 'toast-' + Date.now();
+            const toastClasses = {
+                'success': 'bg-success text-white',
+                'error': 'bg-danger text-white',
+                'warning': 'bg-warning',
+                'info': 'bg-info'
+            };
+            
+            const toast = document.createElement('div');
+            toast.className = `toast ${toastClasses[type]} mb-2`;
+            toast.id = toastId;
+            toast.setAttribute('role', 'alert');
+            toast.setAttribute('aria-live', 'assertive');
+            toast.setAttribute('aria-atomic', 'true');
+            toast.innerHTML = `
+                <div class="toast-header">
+                    <strong class="me-auto">Notification</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    ${message}
+                </div>
+            `;
+            
+            toastContainer.appendChild(toast);
+            const bsToast = new bootstrap.Toast(toast);
+            bsToast.show();
+            
+            // Remove toast after it's hidden
+            toast.addEventListener('hidden.bs.toast', function() {
+                toast.remove();
+            });
+        }
+        
+        // Format file size in a human-readable way
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+        
+        // Format confidence as percentage
+        function formatConfidence(confidence) {
+            return (confidence * 100).toFixed(1) + '%';
+        }
+    </script>
+    
+</body>
+</html>
