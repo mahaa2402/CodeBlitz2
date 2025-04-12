@@ -35,10 +35,10 @@ app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 50MB max upload size
 # Initialize detector with default settings
 try:
     obstacle_detector = ObstacleDetector(
-        model_path="model/yolov4-tiny.weights",
+        model_path="model/yolov4-tiny.weights", 
         config_path="model/yolov4-tiny.cfg",
         classes_path="model/coco.names",
-        confidence_threshold=0.5,
+        confidence_threshold=0.5, 
         road_hazard_confidence_threshold=0.4
     )
     logger.info("Detector initialized successfully")
