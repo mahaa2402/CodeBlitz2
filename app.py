@@ -47,9 +47,7 @@ latest_webcam_frame = None
 latest_detections = []
 webcam_capture = None
 
-@app.route('/')
-def home():
-    return "Hello, Render!"
+
 
 
 def allowed_file(filename, allowed_extensions):
