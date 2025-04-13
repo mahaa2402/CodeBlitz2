@@ -1,107 +1,526 @@
 {% extends "base.html" %}
 
-{% block title %}Road Obstacle Detection - Home{% endblock %}
+{% block title %}Road Obstacle Detection{% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-lg-8">
-        <div class="card mb-4">
-            <div class="card-body">
-                <h2 class="card-title">Road Obstacle Detection System</h2>
-                <p class="lead">
-                    A smart computer vision solution for real-time detection of road obstacles and hazards.
-                </p>
-                <p>
-                    This system uses advanced computer vision technology to identify potential hazards and obstacles on roads,
-                    helping to improve safety for drivers, pedestrians, and autonomous vehicles.
-                </p>
-                <div class="alert alert-info">
-                    <h5><i class="fas fa-info-circle me-2"></i>Getting Started</h5>
-                    <p>Choose one of the detection methods from the navigation bar to begin analyzing road scenes.</p>
-                </div>
-            </div>
-        </div>
+<style>
+    body {
+        background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); /* Deeper cosmic gradient */
+        color: #f0f8ff;
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        min-height: 100vh;
+    }
 
-        <div class="card mb-4">
-            <div class="card-header">
-                <h3><i class="fas fa-cogs me-2"></i>Features</h3>
+    .container-fluid {
+        max-width: 1400px;
+        padding: 0 30px;
+    }
+
+    .hero-section {
+        background: radial-gradient(circle at top right, #ff7676, #ff4b2b);
+        text-align: center;
+        padding: 120px 30px 100px;
+        border-radius: 0 0 50% 50% / 20%;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        margin: 0 auto 80px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: -50px;
+        right: -50px;
+        width: 300px;
+        height: 300px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        filter: blur(30px);
+    }
+
+    .hero-section h1 {
+        font-size: 4rem;
+        font-weight: 800;
+        margin-bottom: 25px;
+        background: linear-gradient(to right, #ffffff, #ffe8cc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        animation: fadeInUp 1s ease-out;
+    }
+
+    .hero-section p {
+        font-size: 1.5rem;
+        opacity: 0;
+        animation: fadeInUp 1s ease-out 0.3s forwards;
+    }
+
+    @keyframes fadeInUp {
+        from { 
+            opacity: 0; 
+            transform: translateY(30px); 
+        }
+        to { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+    }
+
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
+        margin: 60px auto;
+        max-width: 1300px;
+        padding: 0 20px;
+    }
+
+    .feature-card {
+        background: rgba(30, 30, 40, 0.7);
+        backdrop-filter: blur(10px);
+        border-radius: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        padding: 40px 30px;
+        transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        overflow: hidden;
+        position: relative;
+    }
+
+    .feature-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+        z-index: 0;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-15px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .feature-card .icon-wrapper {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 25px;
+        background: linear-gradient(135deg, #6b73ff, #00bcd4);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        position: relative;
+        z-index: 1;
+    }
+
+    .feature-card:nth-child(2n) .icon-wrapper {
+        background: linear-gradient(135deg, #ff6b6b, #ff4b2b);
+    }
+
+    .feature-card:nth-child(3n) .icon-wrapper {
+        background: linear-gradient(135deg, #00c9ff, #92fe9d);
+    }
+
+    .feature-card i {
+        color: white;
+        font-size: 2.5em;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        position: relative;
+        z-index: 2;
+    }
+
+    .feature-card h3 {
+        color: #ffffff;
+        margin: 20px 0;
+        font-weight: 700;
+        font-size: 1.5rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .feature-card p {
+        color: #b8c6db;
+        font-size: 1.1em;
+        line-height: 1.7;
+        position: relative;
+        z-index: 1;
+    }
+
+    .quick-start-section {
+        background: linear-gradient(to right, #4a00e0, #8e2de2);
+        padding: 70px 40px;
+        border-radius: 30px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        margin: 80px auto;
+        max-width: 1000px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .quick-start-section::before {
+        content: '';
+        position: absolute;
+        top: -100px;
+        left: -100px;
+        width: 200px;
+        height: 200px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        filter: blur(30px);
+    }
+
+    .quick-start-section::after {
+        content: '';
+        position: absolute;
+        bottom: -100px;
+        right: -100px;
+        width: 200px;
+        height: 200px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        filter: blur(30px);
+    }
+
+    .quick-start-section h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 40px;
+        color: white;
+        text-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .quick-start-btn {
+        background: white;
+        border: none;
+        color: #4a00e0;
+        padding: 16px 32px;
+        margin: 15px;
+        border-radius: 16px;
+        font-weight: 700;
+        font-size: 1.1em;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        position: relative;
+        overflow: hidden;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .quick-start-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: all 0.6s ease;
+    }
+
+    .quick-start-btn:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+        color: #4a00e0;
+        background: #ffffff;
+    }
+
+    .quick-start-btn:hover::before {
+        left: 100%;
+    }
+
+    .quick-start-btn i {
+        margin-right: 10px;
+        font-size: 1.2em;
+    }
+
+    .about-section {
+        background: linear-gradient(to right, #141e30, #243b55);
+        padding: 70px 40px;
+        border-radius: 30px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        margin: 80px auto;
+        max-width: 1000px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .about-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(73, 155, 234, 0.1) 0%, transparent 70%);
+    }
+
+    .about-section h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 30px;
+        color: white;
+        position: relative;
+        display: inline-block;
+    }
+
+    .about-section h2::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(to right, #00c9ff, #92fe9d);
+        border-radius: 2px;
+    }
+
+    .about-section p {
+        color: #d0e1f9;
+        font-size: 1.2em;
+        line-height: 1.7;
+        margin-bottom: 30px;
+    }
+
+    .about-section ul {
+        list-style: none;
+        padding-left: 0;
+        margin-top: 30px;
+        position: relative;
+    }
+
+    .about-section ul li {
+        color: #b8c6db;
+        padding: 15px 0 15px 40px;
+        font-size: 1.15em;
+        line-height: 1.7;
+        position: relative;
+        transition: all 0.3s ease;
+    }
+
+    .about-section ul li:hover {
+        color: #ffffff;
+        transform: translateX(5px);
+    }
+
+    .about-section ul li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 24px;
+        height: 24px;
+        background: linear-gradient(135deg, #00c9ff, #92fe9d);
+        border-radius: 50%;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .about-section ul li::after {
+        content: '✓';
+        position: absolute;
+        left: 7px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #1a1a2e;
+        font-weight: bold;
+        font-size: 0.9em;
+    }
+
+    .alert-info {
+        background: rgba(23, 29, 59, 0.7);
+        backdrop-filter: blur(10px);
+        color: #e0f7fa;
+        border: 1px solid rgba(0, 188, 212, 0.3);
+        padding: 30px;
+        border-radius: 20px;
+        margin: 60px auto;
+        max-width: 1000px;
+        position: relative;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .alert-info h5 {
+        display: flex;
+        align-items: center;
+        color: #4fc3f7;
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+
+    .alert-info i {
+        font-size: 1.5em;
+        margin-right: 15px;
+        background: linear-gradient(135deg, #00c9ff, #92fe9d);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .alert-info p {
+        font-size: 1.1em;
+        line-height: 1.7;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .hero-section {
+            padding: 80px 20px 60px;
+            border-radius: 0 0 25% 25% / 10%;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+        }
+
+        .feature-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .quick-start-section, .about-section {
+            padding: 50px 25px;
+            border-radius: 20px;
+        }
+
+        .quick-start-btn {
+            width: 100%;
+            margin: 10px 0;
+        }
+    }
+
+    /* Animation for cards on scroll */
+    .fade-in-up {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in-up.appear {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="hero-section">
+        
+        <h1>Road Obstacle Detection</h1>
+        <p class="lead">Revolutionizing Road Safety with Advanced AI Vision.</p>
+    </div>
+
+    <div class="feature-grid">
+        <div class="feature-card fade-in-up">
+            <div class="icon-wrapper">
+                <i class="fas fa-image"></i>
             </div>
-            <div class="card-body">
-                <ul class="feature-list">
-                    <li>
-                        <strong><i class="fas fa-image me-2"></i>Single Image Detection:</strong>
-                        Upload and analyze a single image to detect road obstacles.
-                    </li>
-                    <li>
-                        <strong><i class="fas fa-images me-2"></i>Multiple Images Detection:</strong>
-                        Process multiple images in a batch for efficient analysis.
-                    </li>
-                    <li>
-                        <strong><i class="fas fa-video me-2"></i>Video Detection:</strong>
-                        Analyze video footage to identify moving and stationary obstacles.
-                    </li>
-                    <li>
-                        <strong><i class="fas fa-camera me-2"></i>Webcam Detection:</strong>
-                        Real-time detection using your webcam feed.
-                    </li>
-                    <li>
-                        <strong><i class="fas fa-exclamation-triangle me-2"></i>Road Hazard Prioritization:</strong>
-                        Special highlighting for critical road hazards that require immediate attention.
-                    </li>
-                    <li>
-                        <strong><i class="fas fa-tachometer-alt me-2"></i>Adjustable Detection Sensitivity:</strong>
-                        Customize confidence thresholds to balance detection accuracy and false positives.
-                    </li>
-                </ul>
+            <h3>Single Image Analysis</h3>
+            <p>Dive deep into individual images to pinpoint potential road hazards with precision.</p>
+        </div>
+        <div class="feature-card fade-in-up">
+            <div class="icon-wrapper">
+                <i class="fas fa-images"></i>
             </div>
+            <h3>Batch Image Processing</h3>
+            <p>Process multiple images seamlessly, saving time and enhancing efficiency.</p>
+        </div>
+        <div class="feature-card fade-in-up">
+            <div class="icon-wrapper">
+                <i class="fas fa-video"></i>
+            </div>
+            <h3>Video Obstacle Detection</h3>
+            <p>Analyze video streams dynamically, identifying moving and static obstacles in real-time.</p>
+        </div>
+        <div class="feature-card fade-in-up">
+            <div class="icon-wrapper">
+                <i class="fas fa-camera"></i>
+            </div>
+            <h3>Live Webcam Monitoring</h3>
+            <p>Experience instant hazard detection through your webcam, enhancing immediate safety.</p>
+        </div>
+        <div class="feature-card fade-in-up">
+            <div class="icon-wrapper">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h3>Critical Hazard Alerts</h3>
+            <p>Prioritize and highlight urgent hazards, ensuring immediate attention and action.</p>
+        </div>
+        <div class="feature-card fade-in-up">
+            <div class="icon-wrapper">
+                <i class="fas fa-tachometer-alt"></i>
+            </div>
+            <h3>Sensitivity Customization</h3>
+            <p>Tailor detection thresholds to match specific environments, ensuring optimal performance.</p>
         </div>
     </div>
 
-    <div class="col-lg-4">
-        <div class="card mb-4">
-            <div class="card-header">
-                <h3><i class="fas fa-rocket me-2"></i>Quick Start</h3>
-            </div>
-            <div class="card-body">
-                <div class="d-grid gap-3">
-                    <a href="{{ url_for('image_detection') }}" class="btn btn-primary">
-                        <i class="fas fa-image me-2"></i>Single Image
-                    </a>
-                    <a href="{{ url_for('multiple_images_detection') }}" class="btn btn-primary">
-                        <i class="fas fa-images me-2"></i>Multiple Images
-                    </a>
-                    <a href="{{ url_for('video_detection') }}" class="btn btn-primary">
-                        <i class="fas fa-video me-2"></i>Video
-                    </a>
-                    <a href="{{ url_for('webcam_detection') }}" class="btn btn-primary">
-                        <i class="fas fa-camera me-2"></i>Webcam
-                    </a>
-                </div>
-            </div>
+    <div class="quick-start-section fade-in-up">
+        <h2>Quick Start</h2>
+        <div class="text-center">
+            <a href="{{ url_for('image_detection') }}" class="btn quick-start-btn">
+                <i class="fas fa-image"></i> Single Image
+            </a>
+            <a href="{{ url_for('multiple_images_detection') }}" class="btn quick-start-btn">
+                <i class="fas fa-images"></i> Multiple Images
+            </a>
+            <a href="{{ url_for('video_detection') }}" class="btn quick-start-btn">
+                <i class="fas fa-video"></i> Video
+            </a>
+            <a href="{{ url_for('webcam_detection') }}" class="btn quick-start-btn">
+                <i class="fas fa-camera"></i> Webcam
+            </a>
         </div>
+    </div>
 
-        <div class="card mb-4">
-            <div class="card-header">
-                <h3><i class="fas fa-info-circle me-2"></i>About</h3>
-            </div>
-            <div class="card-body">
-                <p>
-                    This system uses an OpenCV-based computer vision model to identify various types of objects that could 
-                    be obstacles on roads, including:
-                </p>
-                <ul>
-                    <li>Pedestrians</li>
-                    <li>Vehicles (cars, trucks, buses)</li>
-                    <li>Cyclists</li>
-                    <li>Animals</li>
-                    <li>Traffic elements (signals, signs)</li>
-                </ul>
-                <p>
-                    Objects are categorized as potential road hazards based on their type and position, 
-                    with special visual indicators for critical obstacles.
-                </p>
-            </div>
-        </div>
+    <div class="about-section fade-in-up">
+        <h2>About Our System</h2>
+        <p>Our system harnesses the power of advanced computer vision to detect and categorize a variety of road obstacles:</p>
+        <ul>
+            <li>Pedestrians: Ensuring pedestrian safety with accurate detection.</li>
+            <li>Vehicles (cars, trucks, buses): Monitoring vehicular traffic for potential hazards.</li>
+            <li>Cyclists: Identifying cyclists to prevent accidents and promote safety.</li>
+            <li>Animals: Detecting animals on the road to minimize collisions.</li>
+            <li>Traffic signals and signs: Ensuring compliance and safety through signal detection.</li>
+        </ul>
+        <p>We leverage sophisticated algorithms to classify and prioritize objects, enhancing overall road safety.</p>
+    </div>
+
+    <div class="alert alert-info fade-in-up">
+        <h5><i class="fas fa-info-circle"></i> Getting Started</h5>
+        <p>Dive into road scene analysis by selecting a detection method from the Quick Start section.</p>
     </div>
 </div>
+
+<script>
+    // Animation for elements appearing on scroll
+    document.addEventListener('DOMContentLoaded', function() {
+        const fadeElements = document.querySelectorAll('.fade-in-up');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('appear');
+                }
+            });
+        }, {
+            threshold: 0.15
+        });
+        
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
+    });
+</script>
 {% endblock %}

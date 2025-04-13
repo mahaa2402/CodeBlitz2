@@ -3,111 +3,383 @@
 {% block title %}Road Obstacle Detection - Video{% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-12">
-        <div class="card mb-4">
-            <div class="card-header">
-                <h2><i class="fas fa-video me-2"></i>Video Obstacle Detection</h2>
-            </div>
-            <div class="card-body">
-                <p>Upload a road scene video to detect and highlight potential obstacles and hazards throughout the footage.</p>
-                <div class="alert alert-info" role="alert">
-                    <i class="fas fa-info-circle me-2"></i>Supported formats: MP4, AVI, MOV. Maximum file size: 50MB. Processing may take a few minutes depending on video length.
-                </div>
-            </div>
+<style>
+    body {
+        background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+        color: #f0f8ff;
+        font-family: 'Poppins', sans-serif;
+    }
+    
+    .container-fluid {
+        max-width: 1400px;
+        padding: 40px 30px;
+    }
+    
+    .page-header {
+        background: radial-gradient(circle at top right, #ff7676, #ff4b2b);
+        text-align: center;
+        padding: 60px 30px;
+        border-radius: 24px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        margin-bottom: 40px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .page-header::before {
+        content: '';
+        position: absolute;
+        top: -30px;
+        right: -30px;
+        width: 200px;
+        height: 200px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        filter: blur(30px);
+    }
+    
+    .page-header h2 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 15px;
+        background: linear-gradient(to right, #ffffff, #ffe8cc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    
+    .page-header p {
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .card {
+        background: rgba(30, 30, 40, 0.7);
+        backdrop-filter: blur(10px);
+        border-radius: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        margin-bottom: 30px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    }
+    
+    .card-header {
+        background: rgba(20, 20, 30, 0.5);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 20px 25px;
+    }
+    
+    .card-header h3 {
+        color: #ffffff;
+        font-weight: 600;
+        margin: 0;
+        font-size: 1.4rem;
+    }
+    
+    .card-body {
+        padding: 25px;
+    }
+    
+    .card-footer {
+        background: rgba(20, 20, 30, 0.3);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 20px 25px;
+    }
+    
+    .alert-info {
+        background: rgba(23, 29, 59, 0.7);
+        color: #e0f7fa;
+        border: 1px solid rgba(0, 188, 212, 0.3);
+        padding: 16px 20px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        margin: 20px 0;
+    }
+    
+    .alert-info i {
+        font-size: 1.3em;
+        margin-right: 12px;
+        color: #4fc3f7;
+    }
+    
+    .drop-zone {
+        border: 2px dashed rgba(255, 255, 255, 0.3);
+        border-radius: 20px;
+        padding: 40px 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .drop-zone:hover {
+        border-color: rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.08);
+    }
+    
+    .drop-zone.active {
+        border-color: #4fc3f7;
+        background: rgba(79, 195, 247, 0.1);
+    }
+    
+    .drop-zone-prompt i {
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 15px;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+    
+    .drop-zone-prompt p {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1.1em;
+        margin: 0;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(to right, #4a00e0, #8e2de2);
+        border: none;
+        border-radius: 12px;
+        padding: 12px 25px;
+        font-weight: 600;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover:not(:disabled) {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+        background: linear-gradient(to right, #5b11f1, #9f3ef3);
+    }
+    
+    .btn-primary:disabled {
+        background: linear-gradient(to right, #666, #888);
+        opacity: 0.7;
+    }
+    
+    .btn-success {
+        background: linear-gradient(to right, #00c9ff, #92fe9d);
+        color: #1a1a2e;
+        border: none;
+        border-radius: 12px;
+        padding: 10px 20px;
+        font-weight: 600;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+    }
+    
+    .btn-success:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+        background: linear-gradient(to right, #11d2ff, #9dffa8);
+    }
+    
+    #loadingIndicator {
+        color: rgba(255, 255, 255, 0.9);
+        padding: 20px 0;
+    }
+    
+    #loadingIndicator .spinner-border {
+        width: 3rem;
+        height: 3rem;
+        border-width: 0.3em;
+    }
+    
+    #processingStatus {
+      margin-top: 10px;
+    }
+    
+    #uploadDetails {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        padding: 15px;
+        margin-top: 20px;
+    }
+    
+    #uploadDetails h4 {
+        color: #a8e6cf;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+    
+    #fileInfo {
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.6;
+    }
+    
+    .img-thumbnail {
+        background-color: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        max-height: 350px;
+        width: auto;
+    }
+    
+    .table {
+        color: rgba(255, 255, 255, 0.9);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .table-hover tbody tr:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+    
+    .table thead th {
+        border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        color: #a8e6cf;
+    }
+    
+    .table td, .table th {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 12px 15px;
+        vertical-align: middle;
+    }
+    
+    .table-danger {
+        background-color: rgba(255, 87, 87, 0.2);
+    }
+    
+    .table-danger:hover {
+        background-color: rgba(255, 87, 87, 0.3) !important;
+    }
+    
+    .hazard-badge {
+        background: linear-gradient(to right, #ff416c, #ff4b2b);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 8px;
+        font-size: 0.85em;
+        font-weight: 600;
+        display: inline-block;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+    }
+    
+    .badge.bg-secondary {
+        background: rgba(108, 117, 125, 0.5) !important;
+        font-weight: normal;
+    }
+    
+    /* Fade animations */
+    .fade-in-up {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    
+    .fade-in-up.appear {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    @media (max-width: 768px) {
+        .page-header {
+            padding: 40px 20px;
+        }
+        
+        .page-header h2 {
+            font-size: 2rem;
+        }
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="page-header fade-in-up">
+        <h2><i class="fas fa-video me-2"></i>Video Obstacle Detection</h2>
+        <p>Upload a road scene video to detect and highlight potential obstacles and hazards throughout the footage.</p>
+        <div class="alert alert-info mx-auto" style="max-width: 600px;">
+            <i class="fas fa-info-circle"></i>
+            <span>Supported formats: MP4, AVI, MOV. Maximum file size: 50MB. Processing may take a few minutes depending on video length.</span>
         </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col-12">
-        <div class="card mb-4">
-            <div class="card-header">
-                <h3>Upload Video</h3>
-            </div>
-            <div class="card-body">
-                <div id="dropZone" class="drop-zone mb-3">
-                    <div class="drop-zone-prompt">
-                        <i class="fas fa-cloud-upload-alt fa-3x mb-3"></i>
-                        <p>Drag & drop a video here or click to browse</p>
-                        <input type="file" id="videoInput" accept=".mp4,.avi,.mov" class="d-none">
-                    </div>
-                </div>
-                <div id="uploadDetails" class="mt-3 d-none">
-                    <h4>Selected Video:</h4>
-                    <p id="fileInfo"></p>
-                </div>
-                <div class="d-grid">
-                    <button id="processBtn" class="btn btn-primary" disabled>
-                        <i class="fas fa-cogs me-2"></i>Process Video
-                    </button>
-                </div>
-                <div id="loadingIndicator" class="text-center my-3 d-none">
-                    <div class="spinner-border text-primary" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                    <div class="progress mt-3">
-                        <div id="processingProgress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
-                    </div>
-                    <p class="mt-2">Processing video... This may take a few minutes.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="resultsSection" class="d-none">
     <div class="row">
         <div class="col-12">
-            <div class="card mb-4">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h3>Detection Results</h3>
-                    <div>
-                        <a id="downloadResultBtn" href="#" class="btn btn-success" download="result_video.mp4">
-                            <i class="fas fa-download me-2"></i>Download Result
-                        </a>
-                    </div>
+            <div class="card fade-in-up">
+                <div class="card-header">
+                    <h3><i class="fas fa-upload me-2"></i>Upload Video</h3>
                 </div>
                 <div class="card-body">
-                    <div id="resultsSummary" class="alert alert-success mb-4">
-                        <i class="fas fa-check-circle me-2"></i><span id="summaryText"></span>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4>Original Video</h4>
-                                </div>
-                                <div class="card-body">
-                                    <video id="originalVideo" class="w-100" controls>
-                                        Your browser does not support the video tag.
-                                    </video>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4>Processed Video</h4>
-                                </div>
-                                <div class="card-body">
-                                    <video id="resultVideo" class="w-100" controls>
-                                        Your browser does not support the video tag.
-                                    </video>
-                                </div>
-                            </div>
+                    <div id="dropZone" class="drop-zone mb-3">
+                        <div class="drop-zone-prompt">
+                            <i class="fas fa-cloud-upload-alt fa-4x mb-3"></i>
+                            <p>Drag & drop a video here or click to browse</p>
+                            <input type="file" id="videoInput" accept=".mp4,.avi,.mov" class="d-none">
                         </div>
                     </div>
-                    
-                    <div class="mt-4">
-                        <h4><i class="fas fa-lightbulb me-2"></i>Usage Tips</h4>
-                        <ul>
-                            <li>Use the video controls to play, pause, and scrub through the videos</li>
-                            <li>Notice how road hazards are highlighted with red bounding boxes</li>
-                            <li>For longer videos, you can download the result for offline viewing</li>
-                        </ul>
+                    <div id="uploadDetails" class="mt-3 d-none">
+                        <h4><i class="fas fa-file-video me-2"></i>Selected Video:</h4>
+                        <p id="fileInfo"></p>
                     </div>
+                    <div class="d-grid">
+                        <button id="processBtn" class="btn btn-primary btn-lg" disabled>
+                            <i class="fas fa-cogs me-2"></i>Process Video
+                        </button>
+                    </div>
+                    <div id="loadingIndicator" class="text-center my-3 d-none">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <div class="progress mt-3">
+                            <div id="processingProgress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
+                        </div>
+                        <p class="mt-2">Processing video... This may take a few minutes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="resultsSection" class="d-none">
+        <div class="card fade-in-up">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h3><i class="fas fa-search me-2"></i>Detection Results</h3>
+                <div>
+                    <a id="downloadResultBtn" href="#" class="btn btn-success">
+                        <i class="fas fa-download me-2"></i>Download Result
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="resultsSummary" class="alert alert-success mb-4">
+                    <i class="fas fa-check-circle me-2"></i><span id="summaryText"></span>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Original Video</h4>
+                            </div>
+                            <div class="card-body">
+                                <video id="originalVideo" class="w-100" controls>
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Processed Video</h4>
+                            </div>
+                            <div class="card-body">
+                                <video id="resultVideo" class="w-100" controls>
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <h4><i class="fas fa-lightbulb me-2"></i>Usage Tips</h4>
+                    <ul>
+                        <li>Use the video controls to play, pause, and scrub through the videos</li>
+                        <li>Notice how road hazards are highlighted with red bounding boxes</li>
+                        <li>For longer videos, you can download the result for offline viewing</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -134,6 +406,14 @@
         
         // Selected file
         let selectedFile = null;
+        
+        // Animation for elements appearing on load
+        const fadeElements = document.querySelectorAll('.fade-in-up');
+        fadeElements.forEach((element, index) => {
+            setTimeout(() => {
+                element.classList.add('appear');
+            }, 100 * index);
+        });
         
         // Event listeners for drag and drop
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
@@ -183,6 +463,74 @@
                 handleFile(this.files[0]);
             }
         });
+        
+        // Helper function to format file size
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' bytes';
+            else if (bytes < 1048576) return (bytes / 1024).toFixed(2) + ' KB';
+            else return (bytes / 1048576).toFixed(2) + ' MB';
+        }
+        
+        // Helper function to show toast notifications
+        function showToast(message, type) {
+            // Create toast container if it doesn't exist
+            let toastContainer = document.getElementById('toastContainer');
+            if (!toastContainer) {
+                toastContainer = document.createElement('div');
+                toastContainer.id = 'toastContainer';
+                toastContainer.style.position = 'fixed';
+                toastContainer.style.bottom = '20px';
+                toastContainer.style.right = '20px';
+                toastContainer.style.zIndex = '1050';
+                document.body.appendChild(toastContainer);
+            }
+            
+            // Create toast element
+            const toast = document.createElement('div');
+            toast.style.minWidth = '250px';
+            toast.style.margin = '10px';
+            toast.style.padding = '15px 20px';
+            toast.style.borderRadius = '10px';
+            toast.style.boxShadow = '0 5px 15px rgba(0,0,0,0.3)';
+            toast.style.fontSize = '1rem';
+            toast.style.transition = 'all 0.3s ease';
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(20px)';
+            
+            // Set color based on type
+            if (type === 'success') {
+                toast.style.background = 'linear-gradient(to right, #00c9ff, #92fe9d)';
+                toast.style.color = '#1a1a2e';
+            } else if (type === 'error') {
+                toast.style.background = 'linear-gradient(to right, #ff416c, #ff4b2b)';
+                toast.style.color = 'white';
+            } else if (type === 'warning') {
+                toast.style.background = 'linear-gradient(to right, #f7971e, #ffd200)';
+                toast.style.color = '#1a1a2e';
+            } else {
+                toast.style.background = 'linear-gradient(to right, #4a00e0, #8e2de2)';
+                toast.style.color = 'white';
+            }
+            
+            toast.innerText = message;
+            toastContainer.appendChild(toast);
+            
+            // Animate in
+            setTimeout(() => {
+                toast.style.opacity = '1';
+                toast.style.transform = 'translateY(0)';
+            }, 10);
+            
+            // Remove after delay
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    toastContainer.removeChild(toast);
+                }, 300);
+            }, 4000);
+        }
         
         // Process the selected file
         function handleFile(file) {
