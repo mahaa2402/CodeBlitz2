@@ -20,6 +20,7 @@ from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SESSION_SECRET", "road_obstacle_detection_secret") 
+logger.info("Flask app initialized and ready to bind port")
 
 # Global flag to track initialization
 initialization_complete = False
@@ -62,7 +63,7 @@ init_thread.start()
 # Import the main app last (after port is open)
 def import_main_app():
     global app
-    time.sleep(1)  # Give some time for the web server to start
+    time_module.sleep(1)  # Give some time for the web server to start
     
     try:
         # Import functions from the main app

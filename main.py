@@ -13,10 +13,9 @@ os.makedirs('static/uploads', exist_ok=True)
 os.makedirs('static/results', exist_ok=True)
 logger.info("Directory check completed")
 
-# Import app after directory setup
-# We defer the imports to optimize startup time
-# and avoid loading heavy modules until actually needed
-from app import app
+# Use the ultra_fast_app for the absolute fastest port binding
+# This is specifically designed to handle Replit's 20-second timeout
+from ultra_fast_app import app
 
 # For gunicorn and other WSGI servers
 if __name__ == '__main__':

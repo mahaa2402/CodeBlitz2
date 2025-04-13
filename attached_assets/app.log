@@ -1,0 +1,400 @@
+2025-04-12 02:27:08,319 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.42:5000
+2025-04-12 02:27:08,320 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-12 02:27:08,343 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 02:27:15,803 - werkzeug - WARNING -  * Debugger is active!
+2025-04-12 02:27:15,811 - werkzeug - INFO -  * Debugger PIN: 118-684-334
+2025-04-12 02:27:26,791 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\venv\\Lib\\site-packages\\jinja2\\environment.py', reloading
+2025-04-12 02:27:26,797 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\venv\\Lib\\site-packages\\jinja2\\loaders.py', reloading
+2025-04-12 02:27:26,815 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 02:27:26] "[35m[1mGET / HTTP/1.1[0m" 500 -
+2025-04-12 02:27:28,105 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 02:27:35,802 - werkzeug - WARNING -  * Debugger is active!
+2025-04-12 02:27:35,810 - werkzeug - INFO -  * Debugger PIN: 118-684-334
+2025-04-12 02:27:36,052 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 02:27:36] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-04-12 02:27:36,147 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 02:27:36] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-04-12 02:31:18,251 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 02:31:18] "[35m[1mGET / HTTP/1.1[0m" 500 -
+2025-04-12 02:31:18,281 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 02:31:18] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-04-12 02:31:18,301 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 02:31:18] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-04-12 02:31:18,341 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 02:31:18] "GET /?__debugger__=yes&cmd=resource&f=console.png&s=9Iv2C5i5yiYulsQnNhCh HTTP/1.1" 200 -
+2025-04-12 02:31:18,365 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 02:31:18] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-04-12 02:31:19,594 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 02:31:19] "[35m[1mGET / HTTP/1.1[0m" 500 -
+2025-04-12 02:31:19,632 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 02:31:19] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-04-12 02:31:19,636 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 02:31:19] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-04-12 02:31:19,666 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 02:31:19] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png&s=9Iv2C5i5yiYulsQnNhCh HTTP/1.1[0m" 304 -
+2025-04-12 02:31:19,690 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 02:31:19] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-04-12 02:31:20,931 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 02:31:20] "[35m[1mGET / HTTP/1.1[0m" 500 -
+2025-04-12 02:31:20,964 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 02:31:20] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-04-12 02:31:20,970 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 02:31:20] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-04-12 02:31:21,001 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 02:31:21] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png&s=9Iv2C5i5yiYulsQnNhCh HTTP/1.1[0m" 304 -
+2025-04-12 02:31:21,034 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 02:31:21] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-04-12 02:31:21,108 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 02:31:21] "[35m[1mGET / HTTP/1.1[0m" 500 -
+2025-04-12 02:31:21,337 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 02:31:21] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-04-12 02:31:21,339 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 02:31:21] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-04-12 02:31:21,362 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 02:31:21] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png&s=9Iv2C5i5yiYulsQnNhCh HTTP/1.1[0m" 304 -
+2025-04-12 02:31:21,380 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 02:31:21] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-04-12 02:31:47,598 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.42:5000
+2025-04-12 02:31:47,599 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-12 02:31:47,624 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 02:31:55,050 - werkzeug - WARNING -  * Debugger is active!
+2025-04-12 02:31:55,058 - werkzeug - INFO -  * Debugger PIN: 118-684-334
+2025-04-12 02:31:57,070 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:31:57] "[35m[1mGET / HTTP/1.1[0m" 500 -
+2025-04-12 02:31:57,239 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:31:57] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-04-12 02:31:57,250 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:31:57] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-04-12 02:31:57,323 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:31:57] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-04-12 02:37:02,179 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\ui\\app.py', reloading
+2025-04-12 02:37:02,184 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\ui\\app.py', reloading
+2025-04-12 02:37:02,185 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\ui\\app.py', reloading
+2025-04-12 02:37:03,260 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 02:37:11,032 - werkzeug - WARNING -  * Debugger is active!
+2025-04-12 02:37:11,040 - werkzeug - INFO -  * Debugger PIN: 118-684-334
+2025-04-12 02:37:12,843 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\ui\\app.py', reloading
+2025-04-12 02:37:12,848 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\ui\\app.py', reloading
+2025-04-12 02:37:12,849 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\ui\\app.py', reloading
+2025-04-12 02:37:14,358 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 02:37:21,964 - werkzeug - WARNING -  * Debugger is active!
+2025-04-12 02:37:21,974 - werkzeug - INFO -  * Debugger PIN: 118-684-334
+2025-04-12 02:37:22,427 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\ui\\app.py', reloading
+2025-04-12 02:37:22,428 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\ui\\app.py', reloading
+2025-04-12 02:37:24,193 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 02:37:31,991 - werkzeug - WARNING -  * Debugger is active!
+2025-04-12 02:37:31,999 - werkzeug - INFO -  * Debugger PIN: 118-684-334
+2025-04-12 02:37:35,179 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\ui\\app.py', reloading
+2025-04-12 02:37:35,186 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\ui\\app.py', reloading
+2025-04-12 02:37:35,187 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\ui\\app.py', reloading
+2025-04-12 02:37:36,526 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 02:37:44,007 - werkzeug - WARNING -  * Debugger is active!
+2025-04-12 02:37:44,014 - werkzeug - INFO -  * Debugger PIN: 118-684-334
+2025-04-12 02:37:44,323 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\ui\\app.py', reloading
+2025-04-12 02:37:44,324 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\ui\\app.py', reloading
+2025-04-12 02:37:46,336 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 02:37:53,845 - werkzeug - WARNING -  * Debugger is active!
+2025-04-12 02:37:53,852 - werkzeug - INFO -  * Debugger PIN: 118-684-334
+2025-04-12 02:37:55,295 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\ui\\app.py', reloading
+2025-04-12 02:37:55,296 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\ui\\app.py', reloading
+2025-04-12 02:37:56,915 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 02:38:04,830 - werkzeug - WARNING -  * Debugger is active!
+2025-04-12 02:38:04,837 - werkzeug - INFO -  * Debugger PIN: 118-684-334
+2025-04-12 02:38:06,691 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\ui\\app.py', reloading
+2025-04-12 02:38:06,696 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\ui\\app.py', reloading
+2025-04-12 02:38:06,698 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\ui\\app.py', reloading
+2025-04-12 02:38:08,289 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 02:38:16,355 - werkzeug - WARNING -  * Debugger is active!
+2025-04-12 02:38:16,362 - werkzeug - INFO -  * Debugger PIN: 118-684-334
+2025-04-12 02:38:16,527 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:38:16] "[35m[1mGET / HTTP/1.1[0m" 500 -
+2025-04-12 02:39:05,208 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\ui\\app.py', reloading
+2025-04-12 02:39:05,213 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\ui\\app.py', reloading
+2025-04-12 02:39:05,214 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\ui\\app.py', reloading
+2025-04-12 02:39:07,132 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 02:39:14,725 - werkzeug - WARNING -  * Debugger is active!
+2025-04-12 02:39:14,731 - werkzeug - INFO -  * Debugger PIN: 118-684-334
+2025-04-12 02:39:33,704 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:39:33] "GET / HTTP/1.1" 200 -
+2025-04-12 02:39:33,770 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:39:33] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 02:39:33,776 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:39:33] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 02:39:33,783 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:39:33] "[33mGET /static/img/detection_demo.jpg HTTP/1.1[0m" 404 -
+2025-04-12 02:39:34,092 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:39:34] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-12 02:39:48,429 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:39:48] "GET /image_detection HTTP/1.1" 200 -
+2025-04-12 02:39:48,491 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:39:48] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 02:39:48,494 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:39:48] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 02:39:51,908 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:39:51] "GET /image_detection?image= HTTP/1.1" 200 -
+2025-04-12 02:39:51,978 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:39:51] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 02:39:51,985 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:39:51] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 02:40:08,181 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:08] "GET /image_detection?image= HTTP/1.1" 200 -
+2025-04-12 02:40:08,230 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:08] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 02:40:08,248 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:08] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 02:40:09,742 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:09] "GET /image_detection?image= HTTP/1.1" 200 -
+2025-04-12 02:40:09,789 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:09] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 02:40:09,795 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:09] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 02:40:11,858 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:11] "GET / HTTP/1.1" 200 -
+2025-04-12 02:40:11,917 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:11] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 02:40:11,927 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:11] "[33mGET /static/img/detection_demo.jpg HTTP/1.1[0m" 404 -
+2025-04-12 02:40:11,929 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:11] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 02:40:15,057 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:15] "GET /image_detection HTTP/1.1" 200 -
+2025-04-12 02:40:15,115 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:15] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 02:40:15,123 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:15] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 02:40:18,215 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:18] "GET /multiple_images_detection HTTP/1.1" 200 -
+2025-04-12 02:40:18,268 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:18] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 02:40:18,274 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:18] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 02:40:44,122 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:44] "[35m[1mGET /settings HTTP/1.1[0m" 500 -
+2025-04-12 02:40:44,270 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:44] "GET /settings?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-04-12 02:40:44,294 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:44] "GET /settings?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-04-12 02:40:44,337 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:44] "GET /settings?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-04-12 02:40:51,250 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:51] "GET /video_detection HTTP/1.1" 200 -
+2025-04-12 02:40:51,303 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:51] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 02:40:51,312 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:51] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 02:40:52,561 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:52] "GET /webcam_detection HTTP/1.1" 200 -
+2025-04-12 02:40:52,616 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:52] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 02:40:52,624 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:52] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 02:40:54,971 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:54] "GET /video_detection HTTP/1.1" 200 -
+2025-04-12 02:40:55,032 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:55] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 02:40:55,045 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:40:55] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 02:41:48,981 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:41:48] "GET /video_detection?video= HTTP/1.1" 200 -
+2025-04-12 02:41:49,046 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:41:49] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 02:41:49,056 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:41:49] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 02:42:01,866 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:42:01] "GET / HTTP/1.1" 200 -
+2025-04-12 02:42:01,924 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:42:01] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 02:42:01,940 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:42:01] "[33mGET /static/img/detection_demo.jpg HTTP/1.1[0m" 404 -
+2025-04-12 02:42:01,945 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:42:01] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 02:49:30,419 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\ui\\app.py', reloading
+2025-04-12 02:49:30,427 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\ui\\app.py', reloading
+2025-04-12 02:49:30,427 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\ui\\app.py', reloading
+2025-04-12 02:49:31,836 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 02:49:39,888 - werkzeug - WARNING -  * Debugger is active!
+2025-04-12 02:49:39,895 - werkzeug - INFO -  * Debugger PIN: 118-684-334
+2025-04-12 02:49:40,096 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:49:40] "GET / HTTP/1.1" 200 -
+2025-04-12 02:49:40,143 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:49:40] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 02:49:40,144 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:49:40] "[33mGET /static/img/detection_demo.jpg HTTP/1.1[0m" 404 -
+2025-04-12 02:49:40,148 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:49:40] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 02:49:56,353 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.42:5000
+2025-04-12 02:49:56,354 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-12 02:49:56,377 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 02:50:04,144 - werkzeug - WARNING -  * Debugger is active!
+2025-04-12 02:50:04,152 - werkzeug - INFO -  * Debugger PIN: 118-684-334
+2025-04-12 02:50:06,448 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:50:06] "GET / HTTP/1.1" 200 -
+2025-04-12 02:50:06,483 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:50:06] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 02:50:06,487 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:50:06] "[33mGET /static/img/detection_demo.jpg HTTP/1.1[0m" 404 -
+2025-04-12 02:50:06,539 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:50:06] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 02:50:10,537 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:50:10] "GET /image_detection HTTP/1.1" 200 -
+2025-04-12 02:50:10,593 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:50:10] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 02:50:10,600 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:50:10] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 02:50:10,605 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:50:10] "[33mGET /static/js/detection.js HTTP/1.1[0m" 404 -
+2025-04-12 02:50:25,616 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:50:25] "GET /multiple_images_detection HTTP/1.1" 200 -
+2025-04-12 02:50:25,672 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:50:25] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 02:50:25,682 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:50:25] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 02:50:28,635 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\flask\\json\\__init__.py', reloading
+2025-04-12 02:50:28,638 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\flask\\wrappers.py', reloading
+2025-04-12 02:50:28,648 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\werkzeug\\wrappers\\__init__.py', reloading
+2025-04-12 02:50:28,650 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\werkzeug\\wrappers\\response.py', reloading
+2025-04-12 02:50:28,702 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\werkzeug\\utils.py', reloading
+2025-04-12 02:50:28,729 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\flask\\globals.py', reloading
+2025-04-12 02:50:28,742 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\werkzeug\\wrappers\\request.py', reloading
+2025-04-12 02:50:28,754 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\werkzeug\\sansio\\request.py', reloading
+2025-04-12 02:50:28,803 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\werkzeug\\_internal.py', reloading
+2025-04-12 02:50:28,831 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\werkzeug\\datastructures\\structures.py', reloading
+2025-04-12 02:50:28,865 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\werkzeug\\datastructures\\mixins.py', reloading
+2025-04-12 02:50:28,882 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\werkzeug\\datastructures\\file_storage.py', reloading
+2025-04-12 02:50:28,907 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\flask\\helpers.py', reloading
+2025-04-12 02:50:30,759 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 02:50:38,114 - werkzeug - WARNING -  * Debugger is active!
+2025-04-12 02:50:38,122 - werkzeug - INFO -  * Debugger PIN: 118-684-334
+2025-04-12 02:51:13,093 - __main__ - INFO - Model loaded successfully
+2025-04-12 02:51:13,305 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\venv\\Lib\\site-packages\\torchvision\\_meta_registrations.py', reloading
+2025-04-12 02:51:14,700 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 02:51:22,411 - werkzeug - WARNING -  * Debugger is active!
+2025-04-12 02:51:22,418 - werkzeug - INFO -  * Debugger PIN: 118-684-334
+2025-04-12 02:51:22,578 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:51:22] "GET /image_detection HTTP/1.1" 200 -
+2025-04-12 02:51:22,640 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:51:22] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 02:51:22,647 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:51:22] "[33mGET /static/js/detection.js HTTP/1.1[0m" 404 -
+2025-04-12 02:51:22,654 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:51:22] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 02:51:41,714 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:51:41] "GET /multiple_images_detection HTTP/1.1" 200 -
+2025-04-12 02:51:41,771 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:51:41] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 02:51:41,772 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:51:41] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 02:51:52,939 - __main__ - INFO - Model loaded successfully
+2025-04-12 02:51:54,358 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\venv\\Lib\\site-packages\\torch\\_dynamo\\config.py', reloading
+2025-04-12 02:51:54,410 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\venv\\Lib\\site-packages\\torch\\_inductor\\config.py', reloading
+2025-04-12 02:51:54,414 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\venv\\Lib\\site-packages\\torch\\_functorch\\config.py', reloading
+2025-04-12 02:51:54,550 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\venv\\Lib\\site-packages\\torch\\_inductor\\test_operators.py', reloading
+2025-04-12 02:51:54,868 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\venv\\Lib\\site-packages\\torch\\distributed\\_functional_collectives.py', reloading
+2025-04-12 02:51:54,878 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\venv\\Lib\\site-packages\\torch\\distributed\\tensor\\_collective_utils.py', reloading
+2025-04-12 02:51:55,150 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\venv\\Lib\\site-packages\\torch\\distributed\\fsdp\\_fully_shard\\_fsdp_param.py', reloading
+2025-04-12 02:51:55,156 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\venv\\Lib\\site-packages\\torch\\distributed\\fsdp\\_fully_shard\\_fsdp_collectives.py', reloading
+2025-04-12 02:51:55,299 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\venv\\Lib\\site-packages\\torch\\_dynamo\\_trace_wrapped_higher_order_op.py', reloading
+2025-04-12 02:51:55,410 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\venv\\Lib\\site-packages\\torch\\compiler\\config.py', reloading
+2025-04-12 02:51:56,540 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 02:52:04,261 - werkzeug - WARNING -  * Debugger is active!
+2025-04-12 02:52:04,269 - werkzeug - INFO -  * Debugger PIN: 118-684-334
+2025-04-12 02:52:25,970 - __main__ - INFO - Model loaded successfully
+2025-04-12 02:52:28,347 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\venv\\Lib\\site-packages\\torchvision\\models\\densenet.py', reloading
+2025-04-12 02:52:28,734 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:52:28] "POST /process_multiple_images HTTP/1.1" 200 -
+2025-04-12 02:52:28,908 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:52:28] "GET /static/uploads/batch_20250412025225/Screenshot_2025-04-12_012129.png HTTP/1.1" 200 -
+2025-04-12 02:52:28,923 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:52:28] "GET /static/results/batch_20250412025225/detected_Screenshot_2025-04-12_012129.png HTTP/1.1" 200 -
+2025-04-12 02:52:29,859 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 02:52:37,208 - werkzeug - WARNING -  * Debugger is active!
+2025-04-12 02:52:37,215 - werkzeug - INFO -  * Debugger PIN: 118-684-334
+2025-04-12 02:52:56,263 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:52:56] "GET /image_detection HTTP/1.1" 200 -
+2025-04-12 02:52:56,328 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:52:56] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 02:52:56,334 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:52:56] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 02:52:56,335 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:52:56] "[33mGET /static/js/detection.js HTTP/1.1[0m" 404 -
+2025-04-12 02:53:08,055 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:53:08] "GET /multiple_images_detection HTTP/1.1" 200 -
+2025-04-12 02:53:08,116 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:53:08] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 02:53:08,121 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:53:08] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 02:53:14,453 - __main__ - INFO - Model loaded successfully
+2025-04-12 02:53:17,163 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:53:17] "POST /process_multiple_images HTTP/1.1" 200 -
+2025-04-12 02:53:17,356 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:53:17] "GET /static/uploads/batch_20250412025314/Screenshot_2025-04-12_012347.png HTTP/1.1" 200 -
+2025-04-12 02:53:17,376 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:53:17] "GET /static/results/batch_20250412025314/detected_Screenshot_2025-04-12_012347.png HTTP/1.1" 200 -
+2025-04-12 02:53:35,513 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:53:35] "GET /video_detection HTTP/1.1" 200 -
+2025-04-12 02:53:35,569 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:53:35] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 02:53:35,581 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:53:35] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 02:53:41,794 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:53:41] "GET /image_detection HTTP/1.1" 200 -
+2025-04-12 02:53:41,854 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:53:41] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 02:53:41,872 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:53:41] "[33mGET /static/js/detection.js HTTP/1.1[0m" 404 -
+2025-04-12 02:53:41,875 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:53:41] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 02:54:31,259 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:54:31] "GET /multiple_images_detection HTTP/1.1" 200 -
+2025-04-12 02:54:31,317 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:54:31] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 02:54:31,334 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:54:31] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 02:54:37,501 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:54:37] "POST /process_multiple_images HTTP/1.1" 200 -
+2025-04-12 02:54:37,516 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:54:37] "GET /static/uploads/batch_20250412025437/Screenshot_2025-04-12_012347.png HTTP/1.1" 200 -
+2025-04-12 02:54:37,543 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 02:54:37] "GET /static/results/batch_20250412025437/detected_Screenshot_2025-04-12_012347.png HTTP/1.1" 200 -
+2025-04-12 03:01:24,580 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\numpy\\_typing\\_dtype_like.py', reloading
+2025-04-12 03:01:24,609 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\numpy\\_typing\\_shape.py', reloading
+2025-04-12 03:01:24,654 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\numpy\\_typing\\_nested_sequence.py', reloading
+2025-04-12 03:01:25,025 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\src\\detect.py', reloading
+2025-04-12 03:01:25,035 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\src\\detect.py', reloading
+2025-04-12 03:01:26,492 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 03:11:03,243 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.42:5000
+2025-04-12 03:11:03,244 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-12 03:11:03,267 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 03:11:10,683 - werkzeug - WARNING -  * Debugger is active!
+2025-04-12 03:11:10,690 - werkzeug - INFO -  * Debugger PIN: 118-684-334
+2025-04-12 03:14:13,257 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.42:5000
+2025-04-12 03:14:13,258 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-12 03:14:13,281 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 03:14:20,903 - werkzeug - WARNING -  * Debugger is active!
+2025-04-12 03:14:20,912 - werkzeug - INFO -  * Debugger PIN: 118-684-334
+2025-04-12 03:14:21,072 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:14:21] "GET / HTTP/1.1" 200 -
+2025-04-12 03:14:21,117 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:14:21] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 03:14:21,119 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:14:21] "[33mGET /static/img/detection_demo.jpg HTTP/1.1[0m" 404 -
+2025-04-12 03:14:21,160 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:14:21] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 03:14:21,460 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:14:21] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-12 03:14:27,009 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:14:27] "GET /image_detection HTTP/1.1" 200 -
+2025-04-12 03:14:27,056 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:14:27] "[33mGET /static/css/bootstrap.min.css HTTP/1.1[0m" 404 -
+2025-04-12 03:14:27,060 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:14:27] "[33mGET /static/css/main.css HTTP/1.1[0m" 404 -
+2025-04-12 03:14:27,065 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:14:27] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 03:14:42,032 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:14:42] "[33mPOST /detect_image HTTP/1.1[0m" 404 -
+2025-04-12 03:14:48,272 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:14:48] "[33mPOST /detect_image HTTP/1.1[0m" 404 -
+2025-04-12 03:15:41,047 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:15:41] "GET /image_detection HTTP/1.1" 200 -
+2025-04-12 03:15:41,096 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:15:41] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 03:15:41,101 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:15:41] "[33mGET /static/js/detection.js HTTP/1.1[0m" 404 -
+2025-04-12 03:15:41,107 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:15:41] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 03:15:53,519 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:15:53] "GET /image_detection HTTP/1.1" 200 -
+2025-04-12 03:15:53,565 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:15:53] "[33mGET /static/css/bootstrap.min.css HTTP/1.1[0m" 404 -
+2025-04-12 03:15:53,571 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:15:53] "[33mGET /static/css/main.css HTTP/1.1[0m" 404 -
+2025-04-12 03:15:53,581 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:15:53] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 03:16:00,085 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:16:00] "GET /image_detection HTTP/1.1" 200 -
+2025-04-12 03:16:00,122 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:16:00] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 03:16:00,132 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:16:00] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 03:16:00,145 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:16:00] "[33mGET /static/js/detection.js HTTP/1.1[0m" 404 -
+2025-04-12 03:16:09,904 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:16:09] "GET /image_detection HTTP/1.1" 200 -
+2025-04-12 03:16:09,931 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:16:09] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 03:16:09,943 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:16:09] "[33mGET /static/js/detection.js HTTP/1.1[0m" 404 -
+2025-04-12 03:16:09,952 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:16:09] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 03:16:21,448 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:16:21] "GET /multiple_images_detection HTTP/1.1" 200 -
+2025-04-12 03:16:21,491 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:16:21] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 03:16:21,507 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:16:21] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 03:16:25,832 - __main__ - INFO - Model loaded successfully
+2025-04-12 03:16:28,656 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:16:28] "POST /process_multiple_images HTTP/1.1" 200 -
+2025-04-12 03:16:28,832 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:16:28] "GET /static/uploads/batch_20250412031625/Screenshot_2025-04-12_012347.png HTTP/1.1" 200 -
+2025-04-12 03:16:28,839 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:16:28] "GET /static/results/batch_20250412031625/detected_Screenshot_2025-04-12_012347.png HTTP/1.1" 200 -
+2025-04-12 03:16:47,030 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:16:47] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 03:17:33,141 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:17:33] "GET /image_detection HTTP/1.1" 200 -
+2025-04-12 03:17:33,193 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:17:33] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 03:17:33,201 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:17:33] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 03:17:33,220 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:17:33] "[33mGET /static/js/detection.js HTTP/1.1[0m" 404 -
+2025-04-12 03:17:35,734 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:17:35] "GET /multiple_images_detection HTTP/1.1" 200 -
+2025-04-12 03:17:35,791 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:17:35] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 03:17:35,796 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:17:35] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 03:17:37,208 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:17:37] "GET /video_detection HTTP/1.1" 200 -
+2025-04-12 03:17:37,273 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:17:37] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 03:17:37,290 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:17:37] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 03:17:38,407 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:17:38] "GET /webcam_detection HTTP/1.1" 200 -
+2025-04-12 03:17:38,460 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:17:38] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 03:17:38,470 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:17:38] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 03:17:40,371 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:17:40] "GET /video_detection HTTP/1.1" 200 -
+2025-04-12 03:17:40,432 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:17:40] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 03:17:40,449 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:17:40] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 03:17:41,623 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:17:41] "GET /multiple_images_detection HTTP/1.1" 200 -
+2025-04-12 03:17:41,685 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:17:41] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 03:17:41,723 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:17:41] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 03:17:49,597 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:17:49] "POST /process_multiple_images HTTP/1.1" 200 -
+2025-04-12 03:17:49,611 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:17:49] "GET /static/uploads/batch_20250412031749/Screenshot_2025-04-12_012347.png HTTP/1.1" 200 -
+2025-04-12 03:17:49,639 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:17:49] "GET /static/results/batch_20250412031749/detected_Screenshot_2025-04-12_012347.png HTTP/1.1" 200 -
+2025-04-12 03:17:57,674 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:17:57] "GET / HTTP/1.1" 200 -
+2025-04-12 03:17:57,741 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:17:57] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 03:17:57,747 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:17:57] "[33mGET /static/img/detection_demo.jpg HTTP/1.1[0m" 404 -
+2025-04-12 03:17:57,751 - werkzeug - INFO - 127.0.0.1 - - [12/Apr/2025 03:17:57] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 03:29:49,718 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\src\\detect.py', reloading
+2025-04-12 03:29:49,719 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\src\\detect.py', reloading
+2025-04-12 03:29:49,720 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\src\\detect.py', reloading
+2025-04-12 03:29:51,050 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 03:38:21,365 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.42:5000
+2025-04-12 03:38:21,365 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-12 03:38:21,381 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 03:38:26,098 - werkzeug - WARNING -  * Debugger is active!
+2025-04-12 03:38:26,104 - werkzeug - INFO -  * Debugger PIN: 118-684-334
+2025-04-12 03:38:32,161 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 03:38:32] "GET / HTTP/1.1" 200 -
+2025-04-12 03:38:32,196 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 03:38:32] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 03:38:32,197 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 03:38:32] "[33mGET /static/img/detection_demo.jpg HTTP/1.1[0m" 404 -
+2025-04-12 03:38:32,245 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 03:38:32] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 03:38:35,120 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 03:38:35] "GET /image_detection HTTP/1.1" 200 -
+2025-04-12 03:38:35,158 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 03:38:35] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 03:38:35,163 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 03:38:35] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 03:38:35,168 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 03:38:35] "[33mGET /static/js/detection.js HTTP/1.1[0m" 404 -
+2025-04-12 03:38:53,631 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 03:38:53] "GET /multiple_images_detection HTTP/1.1" 200 -
+2025-04-12 03:38:53,670 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 03:38:53] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 03:38:53,675 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 03:38:53] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 03:38:58,716 - __main__ - INFO - Model loaded successfully
+2025-04-12 03:39:01,359 - __main__ - ERROR - Error processing multiple images: 'ObstacleDetector' object has no attribute '_process_results'
+2025-04-12 03:39:01,361 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 03:39:01] "[35m[1mPOST /process_multiple_images HTTP/1.1[0m" 500 -
+2025-04-12 03:39:08,079 - __main__ - ERROR - Error processing multiple images: 'ObstacleDetector' object has no attribute '_process_results'
+2025-04-12 03:39:08,080 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 03:39:08] "[35m[1mPOST /process_multiple_images HTTP/1.1[0m" 500 -
+2025-04-12 03:40:07,220 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\src\\detect.py', reloading
+2025-04-12 03:40:07,229 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\src\\detect.py', reloading
+2025-04-12 03:40:07,230 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\src\\detect.py', reloading
+2025-04-12 03:40:07,230 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\src\\detect.py', reloading
+2025-04-12 03:40:08,032 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 03:40:11,790 - werkzeug - WARNING -  * Debugger is active!
+2025-04-12 03:40:11,794 - werkzeug - INFO -  * Debugger PIN: 118-684-334
+2025-04-12 03:40:19,810 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\src\\detect.py', reloading
+2025-04-12 03:40:19,811 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\src\\detect.py', reloading
+2025-04-12 03:40:19,811 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\src\\detect.py', reloading
+2025-04-12 03:40:20,837 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 03:53:17,079 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.42:5000
+2025-04-12 03:53:17,080 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-12 03:53:17,093 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 03:53:20,409 - werkzeug - WARNING -  * Debugger is active!
+2025-04-12 03:53:20,413 - werkzeug - INFO -  * Debugger PIN: 118-684-334
+2025-04-12 03:53:29,568 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 03:53:29] "GET / HTTP/1.1" 200 -
+2025-04-12 03:53:29,619 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 03:53:29] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 03:53:29,624 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 03:53:29] "[33mGET /static/img/detection_demo.jpg HTTP/1.1[0m" 404 -
+2025-04-12 03:53:29,645 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 03:53:29] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 03:53:31,987 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 03:53:31] "GET /multiple_images_detection HTTP/1.1" 200 -
+2025-04-12 03:53:32,020 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 03:53:32] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-04-12 03:53:32,023 - werkzeug - INFO - 192.168.1.42 - - [12/Apr/2025 03:53:32] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-04-12 03:53:38,691 - __main__ - INFO - Model loaded successfully
+2025-04-12 03:53:38,849 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\venv\\Lib\\site-packages\\torchvision\\_meta_registrations.py', reloading
+2025-04-12 03:53:39,960 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 03:53:43,441 - werkzeug - WARNING -  * Debugger is active!
+2025-04-12 03:53:43,446 - werkzeug - INFO -  * Debugger PIN: 118-684-334
+2025-04-12 03:53:52,033 - __main__ - INFO - Model loaded successfully
+2025-04-12 03:53:52,696 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\venv\\Lib\\site-packages\\torch\\_dynamo\\config.py', reloading
+2025-04-12 03:53:52,728 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\venv\\Lib\\site-packages\\torch\\_inductor\\config.py', reloading
+2025-04-12 03:53:52,742 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\venv\\Lib\\site-packages\\torch\\_functorch\\config.py', reloading
+2025-04-12 03:53:53,041 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\venv\\Lib\\site-packages\\torch\\_inductor\\test_operators.py', reloading
+2025-04-12 03:53:53,699 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 03:53:57,491 - werkzeug - WARNING -  * Debugger is active!
+2025-04-12 03:53:57,496 - werkzeug - INFO -  * Debugger PIN: 118-684-334
+2025-04-12 04:04:45,013 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\src\\detect.py', reloading
+2025-04-12 04:04:45,018 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\src\\detect.py', reloading
+2025-04-12 04:04:45,020 - werkzeug - INFO -  * Detected change in 'C:\\Users\\rithi\\OneDrive\\Desktop\\Vista\\object-detection-project\\src\\detect.py', reloading
+2025-04-12 04:04:46,675 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 04:05:16,611 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-12 04:06:03,091 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
