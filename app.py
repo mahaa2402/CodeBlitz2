@@ -47,6 +47,11 @@ latest_webcam_frame = None
 latest_detections = []
 webcam_capture = None
 
+@app.route('/')
+def home():
+    return "Hello, Render!"
+
+
 def allowed_file(filename, allowed_extensions):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed_extensions
 
@@ -440,5 +445,5 @@ def page_not_found(e):
 def server_error(e):
     return render_template('500.html'), 500
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+#if __name__ == '__main__':
+ #   app.run(host='0.0.0.0', port=5000, debug=True)
