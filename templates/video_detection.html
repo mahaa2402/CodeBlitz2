@@ -373,6 +373,8 @@
                         </div>
                     </div>
                 </div>
+                
+                
                 <div class="mt-4">
                     <h4><i class="fas fa-lightbulb me-2"></i>Usage Tips</h4>
                     <ul>
@@ -381,6 +383,7 @@
                         <li>For longer videos, you can download the result for offline viewing</li>
                     </ul>
                 </div>
+               
             </div>
         </div>
     </div>
@@ -565,6 +568,57 @@
             // Hide previous results
             resultsSection.classList.add('d-none');
         }
+        function processVideo(file) {
+    document.getElementById('loadingIndicator').classList.remove('d-none');
+    document.getElementById('processingProgress').style.width = '0%';
+
+    let formData = new FormData();
+    formData.append('video', file);
+
+    fetch('/process_video', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+    console.log("Server response:", data);  // ✅ Check what's coming back
+
+    document.getElementById('loadingIndicator').classList.add('d-none');
+    
+    if (data.error) {
+        alert("Error: " + data.error);
+        return;
+    }
+
+    // Update progress bar
+    document.getElementById('processingProgress').style.width = '100%';
+
+    let summary = "Detected Objects:\n";
+    let uniqueObjects = new Set();
+
+    if (data.detected_objects_per_frame && data.detected_objects_per_frame.length > 0) {
+        data.detected_objects_per_frame.forEach(frameObjs => {
+            frameObjs.forEach(obj => {
+                uniqueObjects.add(obj.class);  // ✅ Add class name to Set
+            });
+        });
+
+        summary += Array.from(uniqueObjects).join(', ');
+    } else {
+        summary += "No objects detected.";
+    }
+
+    document.getElementById('summaryText').innerText = summary;
+    document.getElementById('resultsSection').classList.remove('d-none');
+})
+
+      
+    .catch(error => {
+        document.getElementById('loadingIndicator').classList.add('d-none');
+        alert("Error during video processing: " + error);
+    });
+}
+
         
         // Process video button
         processBtn.addEventListener('click', function() {
@@ -649,4 +703,6 @@
         });
     });
 </script>
+
+
 {% endblock %}

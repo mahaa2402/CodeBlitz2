@@ -254,7 +254,7 @@ def process_multiple_images():
     except Exception as e:
         logger.error(f"Error processing multiple images: {str(e)}")
         return jsonify({'error': f'Error processing images: {str(e)}'}), 500
-
+    
 @app.route('/process_video', methods=['POST'])
 def process_video():
     if not obstacle_detector:
@@ -296,19 +296,34 @@ def process_video():
         # Process video frames
         frame_index = 0
         obstacle_count = 0
-        
+        detected_objects_per_frame = []
+
         while True:
             ret, frame = cap.read()
             if not ret:
                 break
+             
+            if frame_index % 2 == 0:  # Process every other frame for efficiency
+                result_frame, detected_objects = obstacle_detector.detect(frame)
                 
-            # Process every 2nd frame to speed up
-            if frame_index % 2 == 0:
-                result_frame, obstacles = obstacle_detector.detect(frame)
+                # Filter out low-confidence detections
+                obstacles = [obj for obj in detected_objects if obj['confidence'] > 0.6]
                 obstacle_count += len(obstacles)
+                
+                # Format detected objects with names and confidence
+                object_info = []
+                for obj in obstacles:
+                    obj_class = obj.get('class', 'Unknown')  # Object class (car, person, etc.)
+                    obj_confidence = obj.get('confidence', 0.0)  # Object confidence level
+                    object_info.append({
+                        'class': obj_class,
+                        'confidence': obj_confidence
+                    })
+                
+                detected_objects_per_frame.append(object_info)
             else:
                 result_frame = frame
-                
+
             # Add frame to output video
             out.write(result_frame)
             frame_index += 1
@@ -321,12 +336,14 @@ def process_video():
         return jsonify({
             'original_video': f"/static/uploads/{filename}",
             'result_video': f"/static/results/result_{filename}",
-            'message': f"Video processed successfully. Detected {obstacle_count} obstacles in {frame_count} frames."
+            'message': f"Video processed successfully. Detected {obstacle_count} obstacles in {frame_count} frames.",
+            'detected_objects_per_frame': detected_objects_per_frame
         })
         
     except Exception as e:
         logger.error(f"Error processing video: {str(e)}")
         return jsonify({'error': f'Error processing video: {str(e)}'}), 500
+
 
 @app.route('/start_webcam', methods=['POST'])
 def start_webcam():
